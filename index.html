@@ -1280,6 +1280,64 @@
 			return null;
 		}
 
+		function getActivityIconInfo(actName, actType) {
+			const name = (actName || "").toLowerCase();
+
+			if (name.includes("roblox")) {
+				return {
+					iconClass: "fa-solid fa-gamepad",
+					color: "#00a2ff",
+					bgIconClass: "fa-solid fa-gamepad activity-icon-bg",
+					svg: `<svg viewBox="0 0 24 24" fill="#00a2ff" style="width:28px;height:28px;"><path d="M5.164 0L0 18.836 18.836 24 24 5.164 5.164 0zm9.73 13.567l-4.46-1.2 1.2-4.46 4.46 1.2-1.2 4.46z"/></svg>`
+				};
+			}
+			if (name.includes("code") || name.includes("studio") || name.includes("sublime") || name.includes("vim") || name.includes("intellij") || name.includes("pycharm") || name.includes("webstorm") || name.includes("atom") || name.includes("cursor")) {
+				return { iconClass: "fa-solid fa-code", color: "#38bdf8", bgIconClass: "fa-solid fa-code activity-icon-bg" };
+			}
+			if (name.includes("spotify")) {
+				return { iconClass: "fa-brands fa-spotify", color: "#1db954", bgIconClass: "fa-brands fa-spotify activity-icon-bg" };
+			}
+			if (name.includes("soundcloud")) {
+				return { iconClass: "fa-brands fa-soundcloud", color: "#ff5500", bgIconClass: "fa-brands fa-soundcloud activity-icon-bg" };
+			}
+			if (name.includes("youtube")) {
+				return { iconClass: "fa-brands fa-youtube", color: "#ff0000", bgIconClass: "fa-brands fa-youtube activity-icon-bg" };
+			}
+			if (name.includes("twitch")) {
+				return { iconClass: "fa-brands fa-twitch", color: "#9146ff", bgIconClass: "fa-brands fa-twitch activity-icon-bg" };
+			}
+			if (name.includes("discord")) {
+				return { iconClass: "fa-brands fa-discord", color: "#5865f2", bgIconClass: "fa-brands fa-discord activity-icon-bg" };
+			}
+			if (name.includes("minecraft")) {
+				return { iconClass: "fa-solid fa-cube", color: "#22c55e", bgIconClass: "fa-solid fa-cube activity-icon-bg" };
+			}
+			if (name.includes("steam")) {
+				return { iconClass: "fa-brands fa-steam", color: "#66c0f4", bgIconClass: "fa-brands fa-steam activity-icon-bg" };
+			}
+			if (name.includes("chrome") || name.includes("firefox") || name.includes("browser") || name.includes("edge") || name.includes("brave") || name.includes("opera") || name.includes("safari")) {
+				return { iconClass: "fa-solid fa-globe", color: "#3b82f6", bgIconClass: "fa-solid fa-globe activity-icon-bg" };
+			}
+			if (name.includes("photoshop") || name.includes("illustrator") || name.includes("figma") || name.includes("blender") || name.includes("canva") || name.includes("premiere")) {
+				return { iconClass: "fa-solid fa-palette", color: "#ec4899", bgIconClass: "fa-solid fa-palette activity-icon-bg" };
+			}
+
+			if (actType === 1) {
+				return { iconClass: "fa-solid fa-tower-broadcast", color: "#ec4899", bgIconClass: "fa-solid fa-tower-broadcast activity-icon-bg" };
+			}
+			if (actType === 2) {
+				return { iconClass: "fa-solid fa-headphones", color: "#10b981", bgIconClass: "fa-solid fa-headphones activity-icon-bg" };
+			}
+			if (actType === 3) {
+				return { iconClass: "fa-solid fa-tv", color: "#f59e0b", bgIconClass: "fa-solid fa-tv activity-icon-bg" };
+			}
+			if (actType === 5) {
+				return { iconClass: "fa-solid fa-trophy", color: "#eab308", bgIconClass: "fa-solid fa-trophy activity-icon-bg" };
+			}
+
+			return { iconClass: "fa-solid fa-gamepad", color: "#a855f7", bgIconClass: "fa-solid fa-gamepad activity-icon-bg" };
+		}
+
 		function handleActivityImgError(imgEl, appId) {
 			if (!imgEl) return;
 			if (appId && appId !== 'spotify' && !imgEl.dataset.triedAppIcon) {
@@ -1287,7 +1345,14 @@
 				imgEl.src = `https://cdn.discordapp.com/app-icons/${appId}/icon.png?size=256`;
 			} else {
 				if (imgEl.parentElement) {
-					imgEl.parentElement.innerHTML = `<i class="fa-solid fa-code" style="color:#38bdf8; font-size:24px;"></i>`;
+					const actName = imgEl.dataset.actName || "";
+					const actType = parseInt(imgEl.dataset.actType || "0");
+					const info = getActivityIconInfo(actName, actType);
+					if (info.svg) {
+						imgEl.parentElement.innerHTML = info.svg;
+					} else {
+						imgEl.parentElement.innerHTML = `<i class="${info.iconClass}" style="color:${info.color}; font-size:24px;"></i>`;
+					}
 				}
 			}
 		}
@@ -1351,15 +1416,8 @@
 				const nonStatusActivities = data.activities.filter(a => a.type !== 4 && a.name !== "Spotify" && a.type !== 2);
 
 				nonStatusActivities.forEach(act => {
-					let bgIconClass = "fa-solid fa-gamepad activity-icon-bg";
-					const actNameLower = (act.name || "").toLowerCase();
-					if (actNameLower.includes("code") || actNameLower.includes("studio") || actNameLower.includes("sublime")) {
-						bgIconClass = "fa-solid fa-code activity-icon-bg";
-					} else if (actNameLower.includes("youtube")) {
-						bgIconClass = "fa-brands fa-youtube activity-icon-bg";
-					} else if (actNameLower.includes("twitch")) {
-						bgIconClass = "fa-brands fa-twitch activity-icon-bg";
-					}
+					const iconInfo = getActivityIconInfo(act.name, act.type);
+					let bgIconClass = iconInfo.bgIconClass;
 
 					const largeUrl = getActivityAssetUrl(act.assets?.large_image, act.application_id);
 					const smallUrl = getActivityAssetUrl(act.assets?.small_image, act.application_id);
@@ -1371,12 +1429,14 @@
 
 					let artHtml = "";
 					if (mainImageSrc) {
-						artHtml = `<img src="${mainImageSrc}" alt="" onerror="handleActivityImgError(this, '${act.application_id || ''}')" />`;
+						artHtml = `<img src="${mainImageSrc}" alt="" data-act-name="${escapeHTML(act.name || '')}" data-act-type="${act.type || 0}" onerror="handleActivityImgError(this, '${act.application_id || ''}')" />`;
 						if (largeUrl && smallUrl && largeUrl !== smallUrl) {
 							artHtml += `<img class="activity-small-badge" src="${smallUrl}" alt="" onerror="this.style.display='none'" />`;
 						}
+					} else if (iconInfo.svg) {
+						artHtml = iconInfo.svg;
 					} else {
-						artHtml = `<i class="fa-solid fa-code" style="color:#38bdf8; font-size:24px;"></i>`;
+						artHtml = `<i class="${iconInfo.iconClass}" style="color:${iconInfo.color}; font-size:24px;"></i>`;
 					}
 
 					let subText = act.details ? (act.state ? `${act.details} — ${act.state}` : act.details) : (act.state || "Active on Discord");

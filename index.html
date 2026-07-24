@@ -234,21 +234,31 @@
 			height: 16px;
 		}
 
+		.activities-wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 12px;
+			width: 100%;
+			height: 100%;
+		}
+
 		.activity-card {
 			display: flex;
 			align-items: center;
 			gap: 18px;
 			position: relative;
-			padding: 20px 24px;
+			padding: 18px 22px;
 			height: auto;
-			align-self: center;
+			width: 100%;
 			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 			background: rgba(10, 10, 10, 0.92);
 		}
 
-		.activity-card.spotify-active {
-			border-color: rgba(255, 255, 255, 0.12) !important;
-			box-shadow: 0 14px 45px rgba(0, 0, 0, 0.9) !important;
+		.activity-card.spotify-active,
+		.activity-card.game-active {
+			border-color: rgba(255, 255, 255, 0.08) !important;
+			box-shadow: none !important;
 		}
 
 		.activity-icon-bg {
@@ -263,6 +273,7 @@
 		}
 
 		.activity-art-wrap {
+			position: relative;
 			width: 72px;
 			height: 72px;
 			border-radius: 12px;
@@ -270,7 +281,6 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			overflow: hidden;
 			flex-shrink: 0;
 			border: 1px solid rgba(255, 255, 255, 0.08);
 			transition: all 0.3s ease;
@@ -280,6 +290,20 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+			border-radius: 10px;
+		}
+
+		.activity-small-badge {
+			position: absolute !important;
+			bottom: -4px !important;
+			right: -4px !important;
+			width: 24px !important;
+			height: 24px !important;
+			border-radius: 50% !important;
+			border: 2px solid #0a0a0a !important;
+			background: #0a0a0a !important;
+			object-fit: cover !important;
+			z-index: 5;
 		}
 
 		.activity-info {
@@ -335,7 +359,7 @@
 			filter: grayscale(30%);
 		}
 
-		/* card-title is now defined in .recent-card block above for gradient */
+
 
 		.about-section {
 			position: relative;
@@ -401,11 +425,11 @@
 			transform: translateX(5px);
 		}
 
-		.social-btn.roblox:hover {
-			background: rgba(192, 192, 192, 0.2) !important;
-			border-color: #c0c0c0 !important;
-			color: #e2e8f0 !important;
-			box-shadow: 0 0 18px rgba(192, 192, 192, 0.6) !important;
+		.social-btn.tiktok:hover {
+			background: rgba(254, 44, 85, 0.25) !important;
+			border-color: rgba(254, 44, 85, 0.8) !important;
+			color: #ffffff !important;
+			box-shadow: 0 0 18px rgba(254, 44, 85, 0.6) !important;
 			transform: translateX(5px);
 		}
 
@@ -964,23 +988,25 @@
 				</div>
 			</div>
 
-			<div class="card activity-card" id="activity-card">
-				<i class="fa-solid fa-moon activity-icon-bg" id="activity-bg-icon"></i>
-				<div class="activity-art-wrap" id="activity-art-wrap">
-					<i class="fa-regular fa-image" style="color: #475569; font-size: 22px;"></i>
-				</div>
-				<div class="activity-info">
-					<div class="activity-header-lbl" id="activity-header-lbl">No current Activity</div>
-					<div class="activity-title" id="activity-title">No Current Activity</div>
-					<div class="activity-sub" id="activity-sub"></div>
+			<div class="activities-wrapper" id="activities-wrapper">
+				<div class="card activity-card">
+					<i class="fa-solid fa-moon activity-icon-bg"></i>
+					<div class="activity-art-wrap">
+						<i class="fa-regular fa-image" style="color: #475569; font-size: 22px;"></i>
+					</div>
+					<div class="activity-info">
+						<div class="activity-header-lbl">No current Activity</div>
+						<div class="activity-title">No Current Activity</div>
+						<div class="activity-sub"></div>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="bottom-grid">
 			<div class="card about-card">
-				<img class="about-bg-anime" src="" alt="" />
-				<div class="card-title">About Me</div>
+				<img class="about-bg-anime" src="https://pngimg.com/uploads/anime_girl/anime_girl_PNG11.png" alt="" />
+				<div class="card-title">About me</div>
 
 				<div class="about-section">
 					<div class="about-heading">Who am I?</div>
@@ -991,7 +1017,7 @@
 				</div>
 
 				<div class="about-section">
-					<div class="about-heading">My Interests</div>
+					<div class="about-heading">My interests</div>
 					<div class="about-text">
 						i <span class="glowing-love" id="love-target">love</span>
 						<span class="glowing-code" id="dev-target">coding</span>
@@ -1006,12 +1032,12 @@
 									d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
 							</svg> Spotify
 						</a>
-						<a href="https://www.roblox.com/users/9769080868/profile" target="_blank"
-							class="social-btn roblox" onmousemove="spawnButtonSparkle(event, this, '#c0c0c0')">
+						<a href="https://www.tiktok.com/@g239" target="_blank" class="social-btn tiktok"
+							onmousemove="spawnButtonSparkle(event, this, ['#25F4EE', '#FE2C55'])">
 							<svg viewBox="0 0 24 24" fill="currentColor">
-								<path fill-rule="evenodd"
-									d="M18.926 23.843 0 18.926 5.074.157 24 5.074ZM15.348 10.09l-5.258-1.366-1.365 5.258 5.258 1.366Z" />
-							</svg> Roblox
+								<path
+									d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.98-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+							</svg> TikTok
 						</a>
 						<a href="javascript:void(0)" class="social-btn discord" id="discord-copy-btn"
 							onclick="copyDiscordUsername(this)"
@@ -1031,7 +1057,7 @@
 				</div>
 			</div>
 
-			<img class="anime-resting-overlay" src="https://pngimg.com/uploads/anime_girl/anime_girl_PNG34.png"
+			<img class="anime-resting-overlay" src="https://pngimg.com/uploads/anime_girl/anime_girl_PNG42.png"
 				alt="" />
 
 			<div class="card recent-card">
@@ -1228,6 +1254,44 @@
 			} catch (e) { }
 		}
 
+		function getActivityAssetUrl(imgId, appId) {
+			if (!imgId) return null;
+			if (imgId.startsWith("spotify:")) {
+				return `https://i.scdn.co/image/${imgId.replace('spotify:', '')}`;
+			}
+			if (imgId.includes("/https/")) {
+				return "https://" + imgId.split("/https/")[1];
+			}
+			if (imgId.includes("/http/")) {
+				return "http://" + imgId.split("/http/")[1];
+			}
+			if (imgId.startsWith("mp:external/")) {
+				return `https://media.discordapp.net/external/${imgId.replace('mp:external/', '')}`;
+			}
+			if (imgId.startsWith("mp:")) {
+				return `https://media.discordapp.net/${imgId.replace('mp:', '')}`;
+			}
+			if (imgId.startsWith("http://") || imgId.startsWith("https://")) {
+				return imgId;
+			}
+			if (appId) {
+				return `https://cdn.discordapp.com/app-assets/${appId}/${imgId}.png?size=256`;
+			}
+			return null;
+		}
+
+		function handleActivityImgError(imgEl, appId) {
+			if (!imgEl) return;
+			if (appId && appId !== 'spotify' && !imgEl.dataset.triedAppIcon) {
+				imgEl.dataset.triedAppIcon = 'true';
+				imgEl.src = `https://cdn.discordapp.com/app-icons/${appId}/icon.png?size=256`;
+			} else {
+				if (imgEl.parentElement) {
+					imgEl.parentElement.innerHTML = `<i class="fa-solid fa-code" style="color:#38bdf8; font-size:24px;"></i>`;
+				}
+			}
+		}
+
 		function applyPresenceData(data) {
 			if (!data) return;
 			const user = data.discord_user;
@@ -1254,57 +1318,108 @@
 			const st = data.discord_status || "offline";
 			statusBadgeEl.innerHTML = STATUS_SVGS[st] || STATUS_SVGS.offline;
 
+			const activitiesWrapper = document.getElementById("activities-wrapper");
+			if (!activitiesWrapper) return;
+
+			const activeList = [];
+
 			const spotifyData = data.spotify;
 			const spotifyAct = !spotifyData && data.activities ? data.activities.find(a => a.name === "Spotify" || a.type === 2) : null;
 
 			if (spotifyData) {
-				activityBgIcon.className = "fa-brands fa-spotify activity-icon-bg";
-				activityHeaderLbl.textContent = "LISTENING TO SPOTIFY";
-				activityTitle.textContent = spotifyData.song;
-				activitySub.textContent = `by ${spotifyData.artist}`;
-				activityArtWrap.innerHTML = `<img src="${spotifyData.album_art_url}" alt="" />`;
-				document.getElementById('activity-card').classList.add('spotify-active');
+				activeList.push({
+					isSpotify: true,
+					bgIconClass: "fa-brands fa-spotify activity-icon-bg",
+					header: "LISTENING TO SPOTIFY",
+					title: spotifyData.song,
+					sub: `by ${spotifyData.artist}`,
+					artHtml: `<img src="${spotifyData.album_art_url}" alt="" onerror="handleActivityImgError(this, 'spotify')" />`
+				});
+			} else if (spotifyAct) {
+				let artUrl = getActivityAssetUrl(spotifyAct.assets?.large_image || spotifyAct.assets?.small_image, spotifyAct.application_id);
+				activeList.push({
+					isSpotify: true,
+					bgIconClass: "fa-brands fa-spotify activity-icon-bg",
+					header: "LISTENING TO SPOTIFY",
+					title: spotifyAct.details || "Spotify",
+					sub: spotifyAct.state ? `by ${spotifyAct.state}` : "",
+					artHtml: artUrl ? `<img src="${artUrl}" alt="" onerror="handleActivityImgError(this, 'spotify')" />` : `<i class="fa-brands fa-spotify" style="color:#1db954; font-size:24px;"></i>`
+				});
 			}
-			else if (spotifyAct) {
-				activityBgIcon.className = "fa-brands fa-spotify activity-icon-bg";
-				activityHeaderLbl.textContent = "LISTENING TO SPOTIFY";
-				activityTitle.textContent = spotifyAct.details || "Spotify";
-				activitySub.textContent = spotifyAct.state ? `by ${spotifyAct.state}` : "";
-				let artUrl = "";
-				if (spotifyAct.assets && spotifyAct.assets.large_image) {
-					const imgId = spotifyAct.assets.large_image;
-					artUrl = imgId.startsWith("spotify:")
-						? `https://i.scdn.co/image/${imgId.replace('spotify:', '')}`
-						: `https://cdn.discordapp.com/app-assets/${spotifyAct.application_id}/${imgId}.png`;
-				}
-				activityArtWrap.innerHTML = artUrl ? `<img src="${artUrl}" alt="" />` : `<i class="fa-brands fa-spotify" style="color:#1db954; font-size:24px;"></i>`;
-				document.getElementById('activity-card').classList.add('spotify-active');
-			}
-			else if (data.activities && data.activities.length > 0) {
-				document.getElementById('activity-card').classList.remove('spotify-active');
-				const act = data.activities.find(a => a.type !== 4) || data.activities[0];
-				activityHeaderLbl.textContent = act.type === 0 ? "PLAYING A GAME" : (act.type === 3 ? "WATCHING" : "ACTIVE NOW");
-				activityTitle.textContent = act.name || "Custom Activity";
-				activitySub.textContent = act.details || act.state || "Active on Discord";
-				activityBgIcon.className = "fa-solid fa-gamepad activity-icon-bg";
 
-				if (act.assets && act.assets.large_image) {
-					const imgId = act.assets.large_image;
-					const artUrl = imgId.startsWith("spotify:")
-						? `https://i.scdn.co/image/${imgId.replace('spotify:', '')}`
-						: `https://cdn.discordapp.com/app-assets/${act.application_id}/${imgId}.png`;
-					activityArtWrap.innerHTML = `<img src="${artUrl}" alt="" />`;
-				} else {
-					activityArtWrap.innerHTML = `<i class="fa-solid fa-headset" style="color:#a855f7; font-size:24px;"></i>`;
-				}
+			if (data.activities && data.activities.length > 0) {
+				const nonStatusActivities = data.activities.filter(a => a.type !== 4 && a.name !== "Spotify" && a.type !== 2);
+
+				nonStatusActivities.forEach(act => {
+					let bgIconClass = "fa-solid fa-gamepad activity-icon-bg";
+					const actNameLower = (act.name || "").toLowerCase();
+					if (actNameLower.includes("code") || actNameLower.includes("studio") || actNameLower.includes("sublime")) {
+						bgIconClass = "fa-solid fa-code activity-icon-bg";
+					} else if (actNameLower.includes("youtube")) {
+						bgIconClass = "fa-brands fa-youtube activity-icon-bg";
+					} else if (actNameLower.includes("twitch")) {
+						bgIconClass = "fa-brands fa-twitch activity-icon-bg";
+					}
+
+					const largeUrl = getActivityAssetUrl(act.assets?.large_image, act.application_id);
+					const smallUrl = getActivityAssetUrl(act.assets?.small_image, act.application_id);
+
+					let mainImageSrc = largeUrl || smallUrl;
+					if (!mainImageSrc && act.application_id) {
+						mainImageSrc = `https://cdn.discordapp.com/app-icons/${act.application_id}/icon.png?size=256`;
+					}
+
+					let artHtml = "";
+					if (mainImageSrc) {
+						artHtml = `<img src="${mainImageSrc}" alt="" onerror="handleActivityImgError(this, '${act.application_id || ''}')" />`;
+						if (largeUrl && smallUrl && largeUrl !== smallUrl) {
+							artHtml += `<img class="activity-small-badge" src="${smallUrl}" alt="" onerror="this.style.display='none'" />`;
+						}
+					} else {
+						artHtml = `<i class="fa-solid fa-code" style="color:#38bdf8; font-size:24px;"></i>`;
+					}
+
+					let subText = act.details ? (act.state ? `${act.details} — ${act.state}` : act.details) : (act.state || "Active on Discord");
+
+					activeList.push({
+						isGame: true,
+						bgIconClass: bgIconClass,
+						header: act.type === 0 ? "PLAYING A GAME" : (act.type === 3 ? "WATCHING" : (act.type === 1 ? "STREAMING" : "ACTIVE NOW")),
+						title: act.name || "Custom Activity",
+						sub: subText,
+						artHtml: artHtml
+					});
+				});
 			}
-			else {
-				document.getElementById('activity-card').classList.remove('spotify-active');
-				activityBgIcon.className = "fa-solid fa-moon activity-icon-bg";
-				activityHeaderLbl.textContent = "NO CURRENT ACTIVITY";
-				activityTitle.textContent = "No Current Activity";
-				activitySub.textContent = "";
-				activityArtWrap.innerHTML = `<i class="fa-regular fa-image" style="color: #475569; font-size: 22px;"></i>`;
+
+			if (activeList.length > 0) {
+				activitiesWrapper.innerHTML = activeList.map(item => `
+					<div class="card activity-card ${item.isSpotify ? 'spotify-active' : 'game-active'}">
+						<i class="${item.bgIconClass}"></i>
+						<div class="activity-art-wrap">
+							${item.artHtml}
+						</div>
+						<div class="activity-info">
+							<div class="activity-header-lbl">${escapeHTML(item.header)}</div>
+							<div class="activity-title">${escapeHTML(item.title)}</div>
+							<div class="activity-sub">${escapeHTML(item.sub)}</div>
+						</div>
+					</div>
+				`).join("");
+			} else {
+				activitiesWrapper.innerHTML = `
+					<div class="card activity-card">
+						<i class="fa-solid fa-moon activity-icon-bg"></i>
+						<div class="activity-art-wrap">
+							<i class="fa-regular fa-image" style="color: #475569; font-size: 22px;"></i>
+						</div>
+						<div class="activity-info">
+							<div class="activity-header-lbl">NO CURRENT ACTIVITY</div>
+							<div class="activity-title">No Current Activity</div>
+							<div class="activity-sub"></div>
+						</div>
+					</div>
+				`;
 			}
 		}
 
@@ -1668,8 +1783,9 @@
 			const rect = btn.getBoundingClientRect();
 			const sparkle = document.createElement("div");
 			sparkle.className = "btn-sparkle";
-			sparkle.style.background = color;
-			sparkle.style.boxShadow = `0 0 8px ${color}`;
+			const chosenColor = Array.isArray(color) ? color[Math.floor(Math.random() * color.length)] : color;
+			sparkle.style.background = chosenColor;
+			sparkle.style.boxShadow = `0 0 8px ${chosenColor}`;
 			sparkle.style.left = (e.clientX - rect.left) + "px";
 			sparkle.style.top = (e.clientY - rect.top) + "px";
 
@@ -1693,7 +1809,7 @@
 				gibEl.textContent = result + "";
 			}
 		}
-		setInterval(updateGibberish, 200);
+		setInterval(updateGibberish, 35);
 
 		async function fetchLanyardRest() {
 			try {

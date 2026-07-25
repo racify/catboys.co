@@ -57,15 +57,16 @@
 		}
 
 		.card {
-			background: rgba(10, 10, 10, 0.92);
-			border: 1px solid rgba(255, 255, 255, 0.08);
+			background: rgba(255, 255, 255, 0.015);
+			border: 1px solid rgba(255, 255, 255, 0.06);
 			border-radius: 18px;
 			padding: 20px;
 			position: relative;
 			overflow: hidden;
-			backdrop-filter: blur(20px);
-			box-shadow: 0 12px 40px rgba(0, 0, 0, 0.85);
-			transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+			backdrop-filter: blur(16px) saturate(1.1);
+			-webkit-backdrop-filter: blur(16px) saturate(1.1);
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+			transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease;
 		}
 
 		.card::before {
@@ -74,42 +75,42 @@
 			top: 0;
 			left: 0;
 			right: 0;
-			height: 1px;
-			background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+			height: 35%;
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+			border-radius: 18px 18px 0 0;
+			pointer-events: none;
 			z-index: 1;
 		}
 
+		.card::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background: linear-gradient(90deg, transparent 20%, rgba(255, 255, 255, 0.06) 50%, transparent 80%);
+			z-index: 2;
+		}
+
 		.card:hover {
-			border-color: rgba(255, 255, 255, 0.15);
-			box-shadow: 0 16px 50px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+			background: rgba(255, 255, 255, 0.03);
+			border-color: rgba(255, 255, 255, 0.1);
+			box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
 			transform: translateY(-1px);
 		}
 
 		.profile-card {
-			padding: 0;
+			padding: 20px;
 			display: flex;
 			flex-direction: column;
 		}
 
-		.banner-container {
-			width: 100%;
-			height: 100px;
-			position: relative;
-			overflow: hidden;
-			background: rgba(18, 22, 31, 1);
-		}
 
-		.banner-img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
-			mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 15%, rgba(0, 0, 0, 0) 100%);
-		}
 
 		.profile-body {
-			padding: 0 20px 20px 20px;
-			margin-top: -38px;
+			padding: 0;
+			margin-top: 0;
 			position: relative;
 			z-index: 2;
 			display: flex;
@@ -209,11 +210,47 @@
 		}
 
 		.status-text {
-			font-size: 12.5px;
-			color: #6b7280;
-			margin-top: 2px;
-			font-style: italic;
-			letter-spacing: 0.3px;
+			position: absolute;
+			left: calc(100% + 10px);
+			top: 28px;
+			background: #2b2d31;
+			color: #dbdee1;
+			font-size: 13px;
+			font-weight: 500;
+			padding: 6px 14px;
+			border-radius: 16px;
+			white-space: nowrap;
+			pointer-events: none;
+			z-index: 20;
+			display: none;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+		}
+
+		.status-text::before {
+			content: '';
+			position: absolute;
+			top: -6px;
+			left: 10px;
+			width: 14px;
+			height: 14px;
+			background: #2b2d31;
+			border-radius: 50%;
+		}
+
+		.status-text::after {
+			content: '';
+			position: absolute;
+			top: -10px;
+			left: -6px;
+			width: 8px;
+			height: 8px;
+			background: #2b2d31;
+			border-radius: 50%;
+		}
+
+		.status-text.visible {
+			display: flex;
+			align-items: center;
 		}
 
 		.status-badge {
@@ -252,7 +289,7 @@
 			height: auto;
 			width: 100%;
 			transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-			background: rgba(10, 10, 10, 0.92);
+			background: rgba(255, 255, 255, 0.04);
 		}
 
 		.activity-card.spotify-active,
@@ -426,10 +463,12 @@
 		}
 
 		.social-btn.tiktok:hover {
-			background: rgba(254, 44, 85, 0.25) !important;
-			border-color: rgba(254, 44, 85, 0.8) !important;
+			background:
+				linear-gradient(90deg, hsla(178, 80%, 20%, 0.9) 0%, hsla(347, 90%, 22%, 0.9) 100%) padding-box,
+				linear-gradient(90deg, hsla(178, 87%, 55%, 1) 0%, hsla(347, 99%, 58%, 1) 100%) border-box !important;
+			border: 1px solid transparent !important;
 			color: #ffffff !important;
-			box-shadow: 0 0 18px rgba(254, 44, 85, 0.6) !important;
+			box-shadow: 0 0 16px rgba(42, 240, 234, 0.25), 0 0 16px rgba(254, 40, 88, 0.25) !important;
 			transform: translateX(5px);
 		}
 
@@ -956,16 +995,14 @@
 	<div class="container">
 		<div class="top-grid">
 			<div class="card profile-card">
-				<div class="banner-container">
-					<img class="banner-img" id="banner-img" src="banner.png" alt=""
-						onerror="tryNextBannerFormat(this)" />
-				</div>
+
 				<div class="profile-body">
 					<div class="profile-header-row">
 						<div class="avatar-container">
 							<img id="avatar" class="avatar" src="https://cdn.discordapp.com/embed/avatars/0.png"
 								alt="avatar" />
 							<div id="status-badge" class="status-badge"></div>
+							<div class="status-text" id="status-bubble"></div>
 						</div>
 
 						<div class="uk-time-box">
@@ -983,7 +1020,6 @@
 							<div class="discord-badges-inline" id="discord-badges"></div>
 						</div>
 						<div class="user-handle" id="user-handle"></div>
-						<div class="status-text"></div>
 					</div>
 				</div>
 			</div>
@@ -1020,7 +1056,7 @@
 					<div class="about-heading">My interests</div>
 					<div class="about-text">
 						i <span class="glowing-love" id="love-target">love</span>
-						<span class="glowing-code" id="dev-target">coding</span>
+						coding
 					</div>
 
 					<div class="socials-column">
@@ -1375,9 +1411,27 @@
 			}
 
 			const customStatus = data.activities?.find(a => a.type === 4);
-			const statusTextEl = document.querySelector(".status-text");
-			if (statusTextEl && customStatus) {
-				statusTextEl.textContent = customStatus.state || "";
+			const statusBubble = document.getElementById("status-bubble");
+			if (statusBubble) {
+				if (customStatus) {
+					let html = "";
+					if (customStatus.emoji) {
+						if (customStatus.emoji.id) {
+							const ext = customStatus.emoji.animated ? "gif" : "png";
+							html += `<img src="https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${ext}" style="width:16px;height:16px;object-fit:contain;margin-right:5px;" alt="" />`;
+						} else if (customStatus.emoji.name) {
+							html += `<span style="margin-right:5px;">${customStatus.emoji.name}</span>`;
+						}
+					}
+					if (customStatus.state) {
+						html += customStatus.state;
+					}
+					statusBubble.innerHTML = html;
+					statusBubble.classList.toggle('visible', html.trim().length > 0);
+				} else {
+					statusBubble.innerHTML = "";
+					statusBubble.classList.remove('visible');
+				}
 			}
 
 			const st = data.discord_status || "offline";
@@ -1886,6 +1940,133 @@
 		connectLanyardWebSocket();
 		fetchDiscordProfile();
 		fetchRecentPlays();
+
+		(function () {
+			const trailCanvas = document.createElement('canvas');
+			trailCanvas.id = 'mouse-trail-canvas';
+			trailCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+			document.body.appendChild(trailCanvas);
+			const ctx = trailCanvas.getContext('2d');
+
+			function resizeCanvas() {
+				trailCanvas.width = window.innerWidth;
+				trailCanvas.height = window.innerHeight;
+			}
+			resizeCanvas();
+			window.addEventListener('resize', resizeCanvas);
+
+			const particles = [];
+			let mouseX = -100, mouseY = -100;
+			let lastSpawn = 0;
+			let hoveredSocial = null;
+
+			const socialColors = {
+				spotify: { hue: 145, sat: 80, light: 55 },
+				tiktok: null,
+				discord: { hue: 235, sat: 86, light: 65 },
+			};
+
+			document.addEventListener('mousemove', (e) => {
+				mouseX = e.clientX;
+				mouseY = e.clientY;
+				const el = e.target.closest('.social-btn');
+				if (el) {
+					if (el.classList.contains('spotify')) hoveredSocial = 'spotify';
+					else if (el.classList.contains('tiktok')) hoveredSocial = 'tiktok';
+					else if (el.classList.contains('discord')) hoveredSocial = 'discord';
+					else hoveredSocial = null;
+				} else {
+					hoveredSocial = null;
+				}
+			});
+
+			function getParticleColor() {
+				if (!hoveredSocial) {
+					return { hue: 0, sat: 0, light: 80 + Math.random() * 15 };
+				}
+				if (hoveredSocial === 'tiktok') {
+					if (Math.random() > 0.5) {
+						return { hue: 178, sat: 85, light: 58 };
+					} else {
+						return { hue: 342, sat: 99, light: 58 };
+					}
+				}
+				const base = socialColors[hoveredSocial];
+				return {
+					hue: base.hue + (Math.random() - 0.5) * 10,
+					sat: base.sat,
+					light: base.light + Math.random() * 10,
+				};
+			}
+
+			function spawnParticle(x, y) {
+				const angle = Math.random() * Math.PI * 2;
+				const speed = Math.random() * 0.6 + 0.2;
+				const color = getParticleColor();
+				particles.push({
+					x: x + (Math.random() - 0.5) * 4,
+					y: y + (Math.random() - 0.5) * 4,
+					vx: Math.cos(angle) * speed,
+					vy: Math.sin(angle) * speed - 0.3,
+					life: 1,
+					decay: Math.random() * 0.015 + 0.012,
+					size: Math.random() * 3 + 1.5,
+					hue: color.hue,
+					sat: color.sat,
+					light: color.light,
+				});
+			}
+
+			function animate(time) {
+				requestAnimationFrame(animate);
+				ctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+
+				if (time - lastSpawn > 12) {
+					for (let i = 0; i < 2; i++) {
+						spawnParticle(mouseX, mouseY);
+					}
+					lastSpawn = time;
+				}
+
+				for (let i = particles.length - 1; i >= 0; i--) {
+					const p = particles[i];
+					p.x += p.vx;
+					p.y += p.vy;
+					p.vy += 0.01;
+					p.vx *= 0.99;
+					p.life -= p.decay;
+
+					if (p.life <= 0) {
+						particles.splice(i, 1);
+						continue;
+					}
+
+					const alpha = p.life * 0.8;
+					const radius = p.size * p.life;
+
+					ctx.save();
+					ctx.globalAlpha = alpha;
+					ctx.beginPath();
+					ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+
+					const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
+					gradient.addColorStop(0, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 1)`);
+					gradient.addColorStop(0.4, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0.6)`);
+					gradient.addColorStop(1, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0)`);
+					ctx.fillStyle = gradient;
+					ctx.fill();
+
+					ctx.shadowBlur = 8;
+					ctx.shadowColor = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${alpha * 0.5})`;
+					ctx.beginPath();
+					ctx.arc(p.x, p.y, radius * 0.5, 0, Math.PI * 2);
+					ctx.fill();
+					ctx.restore();
+				}
+			}
+
+			requestAnimationFrame(animate);
+		})();
 	</script>
 </body>
 

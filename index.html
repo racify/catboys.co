@@ -20,10 +20,9 @@
 
 		html,
 		body {
-			min-height: 100vh;
+			height: 100vh;
 			width: 100vw;
-			overflow-x: hidden;
-			overflow-y: auto;
+			overflow: hidden;
 			background-color: #000;
 			background-image: none;
 			color: #e2e8f0;
@@ -31,18 +30,6 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			padding: 40px 0 100px 0;
-			scrollbar-width: thin;
-			scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
-		}
-
-		body::-webkit-scrollbar {
-			width: 6px;
-		}
-
-		body::-webkit-scrollbar-thumb {
-			background: rgba(255, 255, 255, 0.15);
-			border-radius: 6px;
 		}
 
 		.container {
@@ -380,6 +367,28 @@
 			fill: #5865F2 !important;
 		}
 
+		.btn-sparkle {
+			position: absolute;
+			width: 3px;
+			height: 3px;
+			border-radius: 50%;
+			pointer-events: none;
+			animation: particleFloat 1.2s ease-out forwards;
+			z-index: 100;
+		}
+
+		@keyframes particleFloat {
+			0% {
+				opacity: 1;
+				transform: translate(0, 0) scale(1);
+			}
+
+			100% {
+				opacity: 0;
+				transform: translate(var(--dx), var(--dy)) scale(0);
+			}
+		}
+
 		.status-text {
 			position: absolute;
 			left: calc(100% + 10px);
@@ -615,349 +624,7 @@
 			filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.9)) brightness(1.2);
 		}
 
-		.comments-card {
-			position: relative;
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
-			min-height: 200px;
-			max-height: 260px;
-		}
 
-		.comments-card-header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			position: relative;
-			z-index: 2;
-		}
-
-		.comments-counter-badge {
-			background: rgba(255, 255, 255, 0.06);
-			border: 1px solid rgba(255, 255, 255, 0.08);
-			font-size: 11px;
-			font-weight: 700;
-			padding: 2px 9px;
-			border-radius: 99px;
-			color: #94a3b8;
-		}
-
-		.comments-list {
-			display: flex;
-			flex-direction: column;
-			gap: 6px;
-			overflow-y: auto;
-			overflow-x: hidden;
-			flex: 1;
-			padding-right: 4px;
-			scrollbar-width: thin;
-			scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-			position: relative;
-			z-index: 2;
-		}
-
-		.comments-list::-webkit-scrollbar {
-			width: 4px;
-		}
-
-		.comments-list::-webkit-scrollbar-thumb {
-			background: rgba(255, 255, 255, 0.15);
-			border-radius: 4px;
-		}
-
-		.comment-item {
-			display: flex;
-			align-items: flex-start;
-			background: rgba(0, 0, 0, 0.35);
-			border: 1px solid rgba(255, 255, 255, 0.05);
-			border-radius: 10px;
-			padding: 8px 12px;
-			transition: background 0.2s ease, border-color 0.2s ease;
-		}
-
-		.comment-item:hover {
-			background: rgba(255, 255, 255, 0.03);
-			border-color: rgba(255, 255, 255, 0.1);
-		}
-
-		.comment-content {
-			flex: 1;
-			min-width: 0;
-			display: flex;
-			flex-direction: column;
-			gap: 3px;
-		}
-
-		.comment-header-row {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 6px;
-		}
-
-		.comment-author {
-			font-size: 11.5px;
-			font-weight: 700;
-			color: #ffffff;
-			white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-
-		.comment-time {
-			font-size: 9.5px;
-			color: #64748b;
-			white-space: nowrap;
-			flex-shrink: 0;
-		}
-
-		.comment-body {
-			font-size: 11px;
-			color: #cbd5e1;
-			line-height: 1.4;
-			word-break: break-word;
-		}
-
-		.comment-actions {
-			display: flex;
-			align-items: center;
-			gap: 4px;
-			margin-top: 2px;
-		}
-
-		.comment-like-btn {
-			background: rgba(255, 255, 255, 0.06);
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			color: #ffffff;
-			font-size: 10.5px;
-			cursor: pointer;
-			display: inline-flex;
-			align-items: center;
-			gap: 4px;
-			padding: 3px 8px;
-			border-radius: 6px;
-			transition: all 0.15s ease;
-		}
-
-		.comment-like-btn i {
-			color: #ffffff;
-		}
-
-		.comment-like-btn:hover {
-			background: rgba(255, 255, 255, 0.15);
-			border-color: rgba(255, 255, 255, 0.25);
-			color: #ffffff;
-		}
-
-		.comment-like-btn.liked {
-			color: #f43f5e;
-			background: rgba(244, 63, 94, 0.12);
-			border-color: rgba(244, 63, 94, 0.35);
-		}
-
-		.comment-like-btn.liked i {
-			color: #f43f5e;
-			font-weight: 900;
-		}
-
-		.comment-reply-btn {
-			background: rgba(255, 255, 255, 0.06);
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			color: #ffffff;
-			font-size: 10.5px;
-			font-weight: 600;
-			cursor: pointer;
-			display: inline-flex;
-			align-items: center;
-			gap: 4px;
-			padding: 3px 8px;
-			border-radius: 6px;
-			transition: all 0.15s ease;
-			margin-left: 2px;
-		}
-
-		.comment-reply-btn i {
-			color: #ffffff;
-		}
-
-		.comment-reply-btn:hover {
-			background: rgba(255, 255, 255, 0.15);
-			border-color: rgba(255, 255, 255, 0.25);
-			color: #ffffff;
-		}
-
-		.comment-reply-badge {
-			display: inline-flex;
-			align-items: center;
-			gap: 4px;
-			font-size: 9.5px;
-			color: #ffffff;
-			background: rgba(255, 255, 255, 0.08);
-			border: 1px solid rgba(255, 255, 255, 0.15);
-			padding: 2px 7px;
-			border-radius: 4px;
-			margin-bottom: 2px;
-			width: fit-content;
-		}
-
-		.comment-reply-badge i {
-			color: #ffffff;
-		}
-
-		.replying-banner {
-			display: none;
-			align-items: center;
-			justify-content: space-between;
-			background: rgba(255, 255, 255, 0.08);
-			border: 1px solid rgba(255, 255, 255, 0.15);
-			border-radius: 6px;
-			padding: 4px 10px;
-			font-size: 10.5px;
-			color: #ffffff;
-		}
-
-		.replying-banner i {
-			color: #ffffff;
-		}
-
-		.replying-banner.active {
-			display: flex;
-		}
-
-		.cancel-reply-btn {
-			background: transparent;
-			border: none;
-			color: #ffffff;
-			cursor: pointer;
-			font-size: 11px;
-			padding: 1px 4px;
-			display: flex;
-			align-items: center;
-			transition: opacity 0.15s;
-		}
-
-		.cancel-reply-btn:hover {
-			opacity: 0.75;
-		}
-
-		.comment-form {
-			display: flex;
-			flex-direction: column;
-			gap: 4px;
-			padding-top: 6px;
-			border-top: 1px solid rgba(255, 255, 255, 0.06);
-			flex-shrink: 0;
-			position: relative;
-			z-index: 2;
-		}
-
-		.comment-form-row {
-			display: flex;
-			gap: 6px;
-			align-items: center;
-		}
-
-		.comment-input {
-			background: rgba(0, 0, 0, 0.45);
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			border-radius: 7px;
-			padding: 6px 9px;
-			color: #ffffff;
-			font-family: inherit;
-			font-size: 11px;
-			outline: none;
-			transition: border-color 0.2s ease, box-shadow 0.2s ease;
-		}
-
-		.comment-input:focus {
-			border-color: rgba(255, 255, 255, 0.5);
-			box-shadow: 0 0 10px rgba(255, 255, 255, 0.12);
-		}
-
-		.comment-input-name {
-			width: 22%;
-			min-width: 90px;
-		}
-
-		.comment-input-msg {
-			flex: 1;
-		}
-
-		.comment-submit-btn {
-			background: #ffffff;
-			border: 1px solid #ffffff;
-			color: #000000;
-			font-family: inherit;
-			font-size: 11px;
-			font-weight: 700;
-			padding: 6px 14px;
-			border-radius: 7px;
-			cursor: pointer;
-			display: inline-flex;
-			align-items: center;
-			gap: 6px;
-			white-space: nowrap;
-			transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-			box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
-		}
-
-		.comment-submit-btn i {
-			color: #000000;
-			font-size: 11px;
-		}
-
-		.comment-submit-btn:hover:not(:disabled) {
-			background: #f1f5f9;
-			box-shadow: 0 4px 18px rgba(255, 255, 255, 0.45);
-			transform: translateY(-1px);
-		}
-
-		.comment-submit-btn:disabled {
-			background: rgba(255, 255, 255, 0.08);
-			border-color: rgba(255, 255, 255, 0.05);
-			color: #64748b;
-			cursor: not-allowed;
-			transform: none;
-			box-shadow: none;
-		}
-
-		.comment-submit-btn:disabled i {
-			color: #64748b;
-		}
-
-		.comment-feedback-msg {
-			font-size: 10px;
-			color: #f43f5e;
-			min-height: 12px;
-			line-height: 1.2;
-			padding-left: 2px;
-		}
-
-		.comment-feedback-msg.success {
-			color: #10b981;
-		}
-
-		.btn-sparkle {
-			position: absolute;
-			width: 3px;
-			height: 3px;
-			border-radius: 50%;
-			pointer-events: none;
-			animation: particleFloat 1.2s ease-out forwards;
-			z-index: 100;
-		}
-
-		@keyframes particleFloat {
-			0% {
-				opacity: 1;
-				transform: translate(0, 0) scale(1);
-			}
-
-			100% {
-				opacity: 0;
-				transform: translate(var(--dx), var(--dy)) scale(0);
-			}
-		}
 
 		.rainbow-dylan {
 			display: inline-block;
@@ -1576,427 +1243,424 @@
 			</div>
 		</div>
 
-		<div class="card comments-card">
-			<div class="comments-card-header">
-				<div class="card-title" style="margin-bottom:0;">Guestbook</div>
-				<span class="comments-counter-badge" id="comments-tab-count">0 comments</span>
-			</div>
-
-			<div class="comments-list" id="comments-list"></div>
-
-			<form class="comment-form" id="comment-form" onsubmit="handleCommentSubmit(event)">
-				<div class="replying-banner" id="replying-banner">
-					<span><i class="fa-solid fa-reply"></i> Replying to <b id="reply-target-name">@user</b></span>
-					<button type="button" class="cancel-reply-btn" onclick="cancelReply()"><i
-							class="fa-solid fa-xmark"></i></button>
-				</div>
-				<div class="comment-form-row">
-					<input type="text" class="comment-input comment-input-name" id="comment-name-input"
-						placeholder=" name" maxlength="20" required autocomplete="off" />
-					<input type="text" class="comment-input comment-input-msg" id="comment-msg-input"
-						placeholder="comment" maxlength="140" required autocomplete="off" />
-					<button type="submit" class="comment-submit-btn" id="comment-submit-btn">
-						<i class="fa-solid fa-paper-plane" id="comment-submit-icon"></i>
-						<span id="comment-submit-txt">Post</span>
-					</button>
-				</div>
-				<div class="comment-feedback-msg" id="comment-feedback-msg"></div>
-			</form>
-		</div>
-	</div>
-
-	<div class="audio-player-bar" id="audio-player-bar">
-		<div class="player-left-group">
-			<img class="player-art" id="player-art" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="" />
-			<div class="player-info">
-				<div class="player-title" id="player-title">Song Title</div>
-				<div class="player-artist" id="player-artist">Artist</div>
-			</div>
-		</div>
-
-		<div class="player-right-group">
-			<button class="player-toggle-btn" id="play-pause-btn" onclick="togglePlayPause()">
-				<i class="fa-solid fa-pause" id="play-pause-icon"></i>
-			</button>
-
-			<div class="player-controls-stack">
-				<div class="player-ctrl-row">
-					<i class="fa-solid fa-volume-high" style="font-size: 11px;"></i>
-					<input type="range" class="player-slider" id="volume-slider" min="0" max="100" value="67"
-						oninput="setVolume(this.value)" />
-					<span class="vol-percent-lbl" id="volume-val">67%</span>
-				</div>
-
-				<div class="player-ctrl-row">
-					<span class="player-time-lbl" id="current-time">0:00</span>
-					<input type="range" class="player-slider" id="seek-slider" min="0" max="100" value="0"
-						oninput="seekAudio(this.value)" />
-					<span class="player-time-lbl" id="total-duration">0:30</span>
+		<div class="audio-player-bar" id="audio-player-bar">
+			<div class="player-left-group">
+				<img class="player-art" id="player-art" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="" />
+				<div class="player-info">
+					<div class="player-title" id="player-title">Song Title</div>
+					<div class="player-artist" id="player-artist">Artist</div>
 				</div>
 			</div>
 
-			<button class="player-close-btn" onclick="closePlayer()">
-				<i class="fa-solid fa-xmark"></i>
-			</button>
+			<div class="player-right-group">
+				<button class="player-toggle-btn" id="play-pause-btn" onclick="togglePlayPause()">
+					<i class="fa-solid fa-pause" id="play-pause-icon"></i>
+				</button>
+
+				<div class="player-controls-stack">
+					<div class="player-ctrl-row">
+						<i class="fa-solid fa-volume-high" style="font-size: 11px;"></i>
+						<input type="range" class="player-slider" id="volume-slider" min="0" max="100" value="67"
+							oninput="setVolume(this.value)" />
+						<span class="vol-percent-lbl" id="volume-val">67%</span>
+					</div>
+
+					<div class="player-ctrl-row">
+						<span class="player-time-lbl" id="current-time">0:00</span>
+						<input type="range" class="player-slider" id="seek-slider" min="0" max="100" value="0"
+							oninput="seekAudio(this.value)" />
+						<span class="player-time-lbl" id="total-duration">0:30</span>
+					</div>
+				</div>
+
+				<button class="player-close-btn" onclick="closePlayer()">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
+			</div>
+
+			<audio id="audio-element"></audio>
 		</div>
 
-		<audio id="audio-element"></audio>
-	</div>
+		<script>
+			const DISCORD_ID = "529238815538413578";
+			const LASTFM_USER = "connnecting";
+			const LASTFM_API_KEY = "8f36c797b442804b6729ffa172e2f1fd";
 
-	<script>
-		const DISCORD_ID = "529238815538413578";
-		const LASTFM_USER = "connnecting";
-		const LASTFM_API_KEY = "8f36c797b442804b6729ffa172e2f1fd";
+			let allFetchedTracks = [];
+			let fetchedDiscordUsername = "";
 
-		let allFetchedTracks = [];
-		let fetchedDiscordUsername = "";
+			function copyDiscordUsername(btn) {
+				const usernameToCopy = fetchedDiscordUsername || "connnecting";
+				const showCopiedFeedback = () => {
+					const btnTexts = document.querySelectorAll(".discord-btn-text");
+					btnTexts.forEach(btnText => {
+						const originalText = btnText.textContent;
+						btnText.textContent = "Copied!";
+						setTimeout(() => {
+							btnText.textContent = originalText;
+						}, 2000);
+					});
+				};
 
-		function copyDiscordUsername(btn) {
-			const usernameToCopy = fetchedDiscordUsername || "connnecting";
-			const showCopiedFeedback = () => {
-				const btnTexts = document.querySelectorAll(".discord-btn-text");
-				btnTexts.forEach(btnText => {
-					const originalText = btnText.textContent;
-					btnText.textContent = "Copied!";
-					setTimeout(() => {
-						btnText.textContent = originalText;
-					}, 2000);
-				});
-			};
-
-			if (navigator.clipboard && navigator.clipboard.writeText) {
-				navigator.clipboard.writeText(usernameToCopy).then(showCopiedFeedback).catch(() => {
+				if (navigator.clipboard && navigator.clipboard.writeText) {
+					navigator.clipboard.writeText(usernameToCopy).then(showCopiedFeedback).catch(() => {
+						fallbackCopyText(usernameToCopy);
+						showCopiedFeedback();
+					});
+				} else {
 					fallbackCopyText(usernameToCopy);
 					showCopiedFeedback();
-				});
-			} else {
-				fallbackCopyText(usernameToCopy);
-				showCopiedFeedback();
-			}
-		}
-
-		function fallbackCopyText(text) {
-			const el = document.createElement('textarea');
-			el.value = text;
-			document.body.appendChild(el);
-			el.select();
-			document.execCommand('copy');
-			document.body.removeChild(el);
-		}
-
-		const usernameEl = document.getElementById("username");
-		const avatarEl = document.getElementById("avatar");
-		const statusBadgeEl = document.getElementById("status-badge");
-		const badgesContainer = document.getElementById("discord-badges");
-		const tracksFeed = document.getElementById("tracks-feed");
-
-		const activityArtWrap = document.getElementById("activity-art-wrap");
-		const activityHeaderLbl = document.getElementById("activity-header-lbl");
-		const activityTitle = document.getElementById("activity-title");
-		const activitySub = document.getElementById("activity-sub");
-		const activityBgIcon = document.getElementById("activity-bg-icon");
-
-		const playerBar = document.getElementById("audio-player-bar");
-		const playerArt = document.getElementById("player-art");
-		const playerTitle = document.getElementById("player-title");
-		const playerArtist = document.getElementById("player-artist");
-		const audioElement = document.getElementById("audio-element");
-		const playPauseIcon = document.getElementById("play-pause-icon");
-		const volumeSlider = document.getElementById("volume-slider");
-		const volumeVal = document.getElementById("volume-val");
-		const seekSlider = document.getElementById("seek-slider");
-		const currentTimeLbl = document.getElementById("current-time");
-		const totalDurationLbl = document.getElementById("total-duration");
-
-		const STATUS_SVGS = {
-			online: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#22c55e"/></svg>`,
-			idle: `<svg viewBox="0 0 16 16"><path fill="#f59e0b" d="M12 10a6 6 0 0 1-6-6 6.07 6.07 0 0 1 .53-2.43A8 8 0 1 0 14 11.47 6.07 6.07 0 0 1 12 10z"/></svg>`,
-			dnd: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#ef4444"/><rect x="3" y="6.5" width="10" height="3" rx="1.5" fill="#12161f"/></svg>`,
-			offline: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#71717a"/><circle cx="8" cy="8" r="4" fill="#12161f"/></svg>`
-		};
-
-		const faviconExtensions = ["favicon.png", "favicon.gif", "favicon.ico", "favicon.jpg", "favicon.jpeg", "favicon.webp"];
-		let faviconIdx = 0;
-		function initFavicon() {
-			const faviconLink = document.getElementById("dynamic-favicon");
-			const img = new Image();
-
-			function tryNextFavicon() {
-				if (faviconIdx >= faviconExtensions.length) return;
-				const currentSrc = faviconExtensions[faviconIdx];
-				img.src = currentSrc;
-				img.onload = () => {
-					faviconLink.href = currentSrc;
-				};
-				img.onerror = () => {
-					faviconIdx++;
-					tryNextFavicon();
-				};
-			}
-			tryNextFavicon();
-		}
-		initFavicon();
-
-		const bannerExtensions = ["banner.png", "banner.gif", "banner.jpeg", "banner.jpg", "banner.webp"];
-		let bannerIdx = 0;
-		function tryNextBannerFormat(img) {
-			bannerIdx++;
-			if (bannerIdx < bannerExtensions.length) {
-				img.src = bannerExtensions[bannerIdx];
-			} else {
-				img.style.display = 'none';
-			}
-		}
-
-		function updateUKTime() {
-			const now = new Date();
-			const ukTimeStr = now.toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit", hour12: false });
-			document.getElementById("uk-time-str").textContent = ukTimeStr;
-
-			const ukHour = parseInt(now.toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", hour12: false }));
-			const localHour = now.getHours();
-			let diff = ukHour - localHour;
-			if (diff > 12) diff -= 24;
-			if (diff < -12) diff += 24;
-
-			const offsetText = diff === 0 ? "same time as you" : (diff > 0 ? `${diff}h ahead of you` : `${Math.abs(diff)}h behind you`);
-			document.getElementById("uk-offset-str").textContent = offsetText;
-		}
-		setInterval(updateUKTime, 1000);
-		updateUKTime();
-
-		async function fetchDiscordProfile() {
-			try {
-				const res = await fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`);
-				if (!res.ok) return;
-				const data = await res.json();
-				const badges = data?.badges || data?.user?.badges || [];
-
-				badgesContainer.innerHTML = badges.map(badge => {
-					const iconUrl = badge.icon ? `https://cdn.discordapp.com/badge-icons/${badge.icon}.png?size=64` : '';
-					return iconUrl ? `<img class="discord-badge-icon" src="${iconUrl}" title="${badge.description || ''}" alt="" />` : '';
-				}).join("");
-			} catch (e) { }
-		}
-
-		function getActivityAssetUrl(imgId, appId) {
-			if (!imgId) return null;
-			if (imgId.startsWith("spotify:")) {
-				return `https://i.scdn.co/image/${imgId.replace('spotify:', '')}`;
-			}
-			if (imgId.includes("/https/")) {
-				return "https://" + imgId.split("/https/")[1];
-			}
-			if (imgId.includes("/http/")) {
-				return "http://" + imgId.split("/http/")[1];
-			}
-			if (imgId.startsWith("mp:external/")) {
-				return `https://media.discordapp.net/external/${imgId.replace('mp:external/', '')}`;
-			}
-			if (imgId.startsWith("mp:")) {
-				return `https://media.discordapp.net/${imgId.replace('mp:', '')}`;
-			}
-			if (imgId.startsWith("http://") || imgId.startsWith("https://")) {
-				return imgId;
-			}
-			if (appId) {
-				return `https://cdn.discordapp.com/app-assets/${appId}/${imgId}.png?size=256`;
-			}
-			return null;
-		}
-
-		function getActivityIconInfo(actName, actType) {
-			const name = (actName || "").toLowerCase();
-
-			if (name.includes("roblox")) {
-				return {
-					iconClass: "fa-solid fa-gamepad",
-					color: "#00a2ff",
-					bgIconClass: "fa-solid fa-gamepad activity-icon-bg",
-					svg: `<svg viewBox="0 0 24 24" fill="#00a2ff" style="width:28px;height:28px;"><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></svg>`
-				};
-			}
-			if (name.includes("code") || name.includes("studio") || name.includes("sublime") || name.includes("vim") || name.includes("intellij") || name.includes("pycharm") || name.includes("webstorm") || name.includes("atom") || name.includes("cursor")) {
-				return { iconClass: "fa-solid fa-code", color: "#38bdf8", bgIconClass: "fa-solid fa-code activity-icon-bg" };
-			}
-			if (name.includes("spotify")) {
-				return { iconClass: "fa-brands fa-spotify", color: "#1db954", bgIconClass: "fa-brands fa-spotify activity-icon-bg" };
-			}
-			if (name.includes("soundcloud")) {
-				return { iconClass: "fa-brands fa-soundcloud", color: "#ff5500", bgIconClass: "fa-brands fa-soundcloud activity-icon-bg" };
-			}
-			if (name.includes("youtube")) {
-				return { iconClass: "fa-brands fa-youtube", color: "#ff0000", bgIconClass: "fa-brands fa-youtube activity-icon-bg" };
-			}
-			if (name.includes("twitch")) {
-				return { iconClass: "fa-brands fa-twitch", color: "#9146ff", bgIconClass: "fa-brands fa-twitch activity-icon-bg" };
-			}
-			if (name.includes("discord")) {
-				return { iconClass: "fa-brands fa-discord", color: "#5865f2", bgIconClass: "fa-brands fa-discord activity-icon-bg" };
-			}
-			if (name.includes("minecraft")) {
-				return { iconClass: "fa-solid fa-cube", color: "#22c55e", bgIconClass: "fa-solid fa-cube activity-icon-bg" };
-			}
-			if (name.includes("steam")) {
-				return { iconClass: "fa-brands fa-steam", color: "#66c0f4", bgIconClass: "fa-brands fa-steam activity-icon-bg" };
-			}
-			if (name.includes("chrome") || name.includes("firefox") || name.includes("browser") || name.includes("edge") || name.includes("brave") || name.includes("opera") || name.includes("safari")) {
-				return { iconClass: "fa-solid fa-globe", color: "#3b82f6", bgIconClass: "fa-solid fa-globe activity-icon-bg" };
-			}
-			if (name.includes("photoshop") || name.includes("illustrator") || name.includes("figma") || name.includes("blender") || name.includes("canva") || name.includes("premiere")) {
-				return { iconClass: "fa-solid fa-palette", color: "#ec4899", bgIconClass: "fa-solid fa-palette activity-icon-bg" };
-			}
-
-			if (actType === 1) {
-				return { iconClass: "fa-solid fa-tower-broadcast", color: "#ec4899", bgIconClass: "fa-solid fa-tower-broadcast activity-icon-bg" };
-			}
-			if (actType === 2) {
-				return { iconClass: "fa-solid fa-headphones", color: "#10b981", bgIconClass: "fa-solid fa-headphones activity-icon-bg" };
-			}
-			if (actType === 3) {
-				return { iconClass: "fa-solid fa-tv", color: "#f59e0b", bgIconClass: "fa-solid fa-tv activity-icon-bg" };
-			}
-			if (actType === 5) {
-				return { iconClass: "fa-solid fa-trophy", color: "#eab308", bgIconClass: "fa-solid fa-trophy activity-icon-bg" };
-			}
-
-			return { iconClass: "fa-solid fa-gamepad", color: "#a855f7", bgIconClass: "fa-solid fa-gamepad activity-icon-bg" };
-		}
-
-		function handleActivityImgError(imgEl, appId) {
-			if (!imgEl) return;
-			if (appId && appId !== 'spotify' && !imgEl.dataset.triedAppIcon) {
-				imgEl.dataset.triedAppIcon = 'true';
-				imgEl.src = `https://cdn.discordapp.com/app-icons/${appId}/icon.png?size=256`;
-			} else {
-				if (imgEl.parentElement) {
-					const actName = imgEl.dataset.actName || "";
-					const actType = parseInt(imgEl.dataset.actType || "0");
-					const info = getActivityIconInfo(actName, actType);
-					if (info.svg) {
-						imgEl.parentElement.innerHTML = info.svg;
-					} else {
-						imgEl.parentElement.innerHTML = `<i class="${info.iconClass}" style="color:${info.color}; font-size:24px;"></i>`;
-					}
-				}
-			}
-		}
-
-		function applyPresenceData(data) {
-			if (!data) return;
-			const user = data.discord_user;
-
-			if (user) {
-				usernameEl.textContent = user.global_name || user.username || "pray";
-				fetchedDiscordUsername = user.username || user.global_name || "";
-				const userHandleEl = document.getElementById("user-handle");
-				if (userHandleEl) {
-					userHandleEl.textContent = user.username ? `@${user.username}` : "";
-				}
-				if (user.avatar) {
-					const ext = user.avatar.startsWith("a_") ? "gif" : "png";
-					avatarEl.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
 				}
 			}
 
-			const customStatus = data.activities?.find(a => a.type === 4);
-			const statusBubble = document.getElementById("status-bubble");
-			if (statusBubble) {
-				if (customStatus) {
-					let html = "";
-					if (customStatus.emoji) {
-						if (customStatus.emoji.id) {
-							const ext = customStatus.emoji.animated ? "gif" : "png";
-							html += `<img src="https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${ext}" style="width:16px;height:16px;object-fit:contain;margin-right:5px;" alt="" />`;
-						} else if (customStatus.emoji.name) {
-							html += `<span style="margin-right:5px;">${customStatus.emoji.name}</span>`;
-						}
-					}
-					if (customStatus.state) {
-						html += customStatus.state;
-					}
-					statusBubble.innerHTML = html;
-					statusBubble.classList.toggle('visible', html.trim().length > 0);
+			function fallbackCopyText(text) {
+				const el = document.createElement('textarea');
+				el.value = text;
+				document.body.appendChild(el);
+				el.select();
+				document.execCommand('copy');
+				document.body.removeChild(el);
+			}
+
+			function spawnButtonSparkle(e, el, colors) {
+				if (!el) return;
+				const rect = el.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+				const colorArr = Array.isArray(colors) ? colors : [colors];
+				const color = colorArr[Math.floor(Math.random() * colorArr.length)];
+
+				const sparkle = document.createElement('span');
+				sparkle.className = 'btn-sparkle';
+				sparkle.style.left = x + 'px';
+				sparkle.style.top = y + 'px';
+				sparkle.style.backgroundColor = color;
+				sparkle.style.boxShadow = `0 0 6px ${color}`;
+
+				const angle = Math.random() * Math.PI * 2;
+				const dist = 10 + Math.random() * 20;
+				const dx = Math.cos(angle) * dist + 'px';
+				const dy = Math.sin(angle) * dist + 'px';
+				sparkle.style.setProperty('--dx', dx);
+				sparkle.style.setProperty('--dy', dy);
+
+				el.appendChild(sparkle);
+				setTimeout(() => sparkle.remove(), 1200);
+			}
+
+			const usernameEl = document.getElementById("username");
+			const avatarEl = document.getElementById("avatar");
+			const statusBadgeEl = document.getElementById("status-badge");
+			const badgesContainer = document.getElementById("discord-badges");
+			const tracksFeed = document.getElementById("tracks-feed");
+
+			const activityArtWrap = document.getElementById("activity-art-wrap");
+			const activityHeaderLbl = document.getElementById("activity-header-lbl");
+			const activityTitle = document.getElementById("activity-title");
+			const activitySub = document.getElementById("activity-sub");
+			const activityBgIcon = document.getElementById("activity-bg-icon");
+
+			const playerBar = document.getElementById("audio-player-bar");
+			const playerArt = document.getElementById("player-art");
+			const playerTitle = document.getElementById("player-title");
+			const playerArtist = document.getElementById("player-artist");
+			const audioElement = document.getElementById("audio-element");
+			const playPauseIcon = document.getElementById("play-pause-icon");
+			const volumeSlider = document.getElementById("volume-slider");
+			const volumeVal = document.getElementById("volume-val");
+			const seekSlider = document.getElementById("seek-slider");
+			const currentTimeLbl = document.getElementById("current-time");
+			const totalDurationLbl = document.getElementById("total-duration");
+
+			const STATUS_SVGS = {
+				online: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#22c55e"/></svg>`,
+				idle: `<svg viewBox="0 0 16 16"><path fill="#f59e0b" d="M12 10a6 6 0 0 1-6-6 6.07 6.07 0 0 1 .53-2.43A8 8 0 1 0 14 11.47 6.07 6.07 0 0 1 12 10z"/></svg>`,
+				dnd: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#ef4444"/><rect x="3" y="6.5" width="10" height="3" rx="1.5" fill="#12161f"/></svg>`,
+				offline: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#71717a"/><circle cx="8" cy="8" r="4" fill="#12161f"/></svg>`
+			};
+
+			const faviconExtensions = ["favicon.png", "favicon.gif", "favicon.ico", "favicon.jpg", "favicon.jpeg", "favicon.webp"];
+			let faviconIdx = 0;
+			function initFavicon() {
+				const faviconLink = document.getElementById("dynamic-favicon");
+				const img = new Image();
+
+				function tryNextFavicon() {
+					if (faviconIdx >= faviconExtensions.length) return;
+					const currentSrc = faviconExtensions[faviconIdx];
+					img.src = currentSrc;
+					img.onload = () => {
+						faviconLink.href = currentSrc;
+					};
+					img.onerror = () => {
+						faviconIdx++;
+						tryNextFavicon();
+					};
+				}
+				tryNextFavicon();
+			}
+			initFavicon();
+
+			const bannerExtensions = ["banner.png", "banner.gif", "banner.jpeg", "banner.jpg", "banner.webp"];
+			let bannerIdx = 0;
+			function tryNextBannerFormat(img) {
+				bannerIdx++;
+				if (bannerIdx < bannerExtensions.length) {
+					img.src = bannerExtensions[bannerIdx];
 				} else {
-					statusBubble.innerHTML = "";
-					statusBubble.classList.remove('visible');
+					img.style.display = 'none';
 				}
 			}
 
-			const st = data.discord_status || "offline";
-			statusBadgeEl.innerHTML = STATUS_SVGS[st] || STATUS_SVGS.offline;
+			function updateUKTime() {
+				const now = new Date();
+				const ukTimeStr = now.toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", minute: "2-digit", hour12: false });
+				document.getElementById("uk-time-str").textContent = ukTimeStr;
 
-			const activitiesWrapper = document.getElementById("activities-wrapper");
-			if (!activitiesWrapper) return;
+				const ukHour = parseInt(now.toLocaleTimeString("en-GB", { timeZone: "Europe/London", hour: "2-digit", hour12: false }));
+				const localHour = now.getHours();
+				let diff = ukHour - localHour;
+				if (diff > 12) diff -= 24;
+				if (diff < -12) diff += 24;
 
-			const activeList = [];
+				const offsetText = diff === 0 ? "same time as you" : (diff > 0 ? `${diff}h ahead of you` : `${Math.abs(diff)}h behind you`);
+				document.getElementById("uk-offset-str").textContent = offsetText;
+			}
+			setInterval(updateUKTime, 1000);
+			updateUKTime();
 
-			const spotifyData = data.spotify;
-			const spotifyAct = !spotifyData && data.activities ? data.activities.find(a => a.name === "Spotify" || a.type === 2) : null;
+			async function fetchDiscordProfile() {
+				try {
+					const res = await fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`);
+					if (!res.ok) return;
+					const data = await res.json();
+					const badges = data?.badges || data?.user?.badges || [];
 
-			if (spotifyData) {
-				activeList.push({
-					isSpotify: true,
-					bgIconClass: "fa-brands fa-spotify activity-icon-bg",
-					header: "LISTENING TO SPOTIFY",
-					title: spotifyData.song,
-					sub: `by ${spotifyData.artist}`,
-					artHtml: `<img src="${spotifyData.album_art_url}" alt="" onerror="handleActivityImgError(this, 'spotify')" />`
-				});
-			} else if (spotifyAct) {
-				let artUrl = getActivityAssetUrl(spotifyAct.assets?.large_image || spotifyAct.assets?.small_image, spotifyAct.application_id);
-				activeList.push({
-					isSpotify: true,
-					bgIconClass: "fa-brands fa-spotify activity-icon-bg",
-					header: "LISTENING TO SPOTIFY",
-					title: spotifyAct.details || "Spotify",
-					sub: spotifyAct.state ? `by ${spotifyAct.state}` : "",
-					artHtml: artUrl ? `<img src="${artUrl}" alt="" onerror="handleActivityImgError(this, 'spotify')" />` : `<i class="fa-brands fa-spotify" style="color:#1db954; font-size:24px;"></i>`
-				});
+					badgesContainer.innerHTML = badges.map(badge => {
+						const iconUrl = badge.icon ? `https://cdn.discordapp.com/badge-icons/${badge.icon}.png?size=64` : '';
+						return iconUrl ? `<img class="discord-badge-icon" src="${iconUrl}" title="${badge.description || ''}" alt="" />` : '';
+					}).join("");
+				} catch (e) { }
 			}
 
-			if (data.activities && data.activities.length > 0) {
-				const nonStatusActivities = data.activities.filter(a => a.type !== 4 && a.name !== "Spotify" && a.type !== 2);
+			function getActivityAssetUrl(imgId, appId) {
+				if (!imgId) return null;
+				if (imgId.startsWith("spotify:")) {
+					return `https://i.scdn.co/image/${imgId.replace('spotify:', '')}`;
+				}
+				if (imgId.includes("/https/")) {
+					return "https://" + imgId.split("/https/")[1];
+				}
+				if (imgId.includes("/http/")) {
+					return "http://" + imgId.split("/http/")[1];
+				}
+				if (imgId.startsWith("mp:external/")) {
+					return `https://media.discordapp.net/external/${imgId.replace('mp:external/', '')}`;
+				}
+				if (imgId.startsWith("mp:")) {
+					return `https://media.discordapp.net/${imgId.replace('mp:', '')}`;
+				}
+				if (imgId.startsWith("http://") || imgId.startsWith("https://")) {
+					return imgId;
+				}
+				if (appId) {
+					return `https://cdn.discordapp.com/app-assets/${appId}/${imgId}.png?size=256`;
+				}
+				return null;
+			}
 
-				nonStatusActivities.forEach(act => {
-					const iconInfo = getActivityIconInfo(act.name, act.type);
-					let bgIconClass = iconInfo.bgIconClass;
+			function getActivityIconInfo(actName, actType) {
+				const name = (actName || "").toLowerCase();
 
-					const largeUrl = getActivityAssetUrl(act.assets?.large_image, act.application_id);
-					const smallUrl = getActivityAssetUrl(act.assets?.small_image, act.application_id);
+				if (name.includes("roblox")) {
+					return {
+						iconClass: "fa-solid fa-gamepad",
+						color: "#00a2ff",
+						bgIconClass: "fa-solid fa-gamepad activity-icon-bg",
+						svg: `<svg viewBox="0 0 24 24" fill="#00a2ff" style="width:28px;height:28px;"><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></svg>`
+					};
+				}
+				if (name.includes("code") || name.includes("studio") || name.includes("sublime") || name.includes("vim") || name.includes("intellij") || name.includes("pycharm") || name.includes("webstorm") || name.includes("atom") || name.includes("cursor")) {
+					return { iconClass: "fa-solid fa-code", color: "#38bdf8", bgIconClass: "fa-solid fa-code activity-icon-bg" };
+				}
+				if (name.includes("spotify")) {
+					return { iconClass: "fa-brands fa-spotify", color: "#1db954", bgIconClass: "fa-brands fa-spotify activity-icon-bg" };
+				}
+				if (name.includes("soundcloud")) {
+					return { iconClass: "fa-brands fa-soundcloud", color: "#ff5500", bgIconClass: "fa-brands fa-soundcloud activity-icon-bg" };
+				}
+				if (name.includes("youtube")) {
+					return { iconClass: "fa-brands fa-youtube", color: "#ff0000", bgIconClass: "fa-brands fa-youtube activity-icon-bg" };
+				}
+				if (name.includes("twitch")) {
+					return { iconClass: "fa-brands fa-twitch", color: "#9146ff", bgIconClass: "fa-brands fa-twitch activity-icon-bg" };
+				}
+				if (name.includes("discord")) {
+					return { iconClass: "fa-brands fa-discord", color: "#5865f2", bgIconClass: "fa-brands fa-discord activity-icon-bg" };
+				}
+				if (name.includes("minecraft")) {
+					return { iconClass: "fa-solid fa-cube", color: "#22c55e", bgIconClass: "fa-solid fa-cube activity-icon-bg" };
+				}
+				if (name.includes("steam")) {
+					return { iconClass: "fa-brands fa-steam", color: "#66c0f4", bgIconClass: "fa-brands fa-steam activity-icon-bg" };
+				}
+				if (name.includes("chrome") || name.includes("firefox") || name.includes("browser") || name.includes("edge") || name.includes("brave") || name.includes("opera") || name.includes("safari")) {
+					return { iconClass: "fa-solid fa-globe", color: "#3b82f6", bgIconClass: "fa-solid fa-globe activity-icon-bg" };
+				}
+				if (name.includes("photoshop") || name.includes("illustrator") || name.includes("figma") || name.includes("blender") || name.includes("canva") || name.includes("premiere")) {
+					return { iconClass: "fa-solid fa-palette", color: "#ec4899", bgIconClass: "fa-solid fa-palette activity-icon-bg" };
+				}
 
-					let mainImageSrc = largeUrl || smallUrl;
-					if (!mainImageSrc && act.application_id) {
-						mainImageSrc = `https://cdn.discordapp.com/app-icons/${act.application_id}/icon.png?size=256`;
-					}
+				if (actType === 1) {
+					return { iconClass: "fa-solid fa-tower-broadcast", color: "#ec4899", bgIconClass: "fa-solid fa-tower-broadcast activity-icon-bg" };
+				}
+				if (actType === 2) {
+					return { iconClass: "fa-solid fa-headphones", color: "#10b981", bgIconClass: "fa-solid fa-headphones activity-icon-bg" };
+				}
+				if (actType === 3) {
+					return { iconClass: "fa-solid fa-tv", color: "#f59e0b", bgIconClass: "fa-solid fa-tv activity-icon-bg" };
+				}
+				if (actType === 5) {
+					return { iconClass: "fa-solid fa-trophy", color: "#eab308", bgIconClass: "fa-solid fa-trophy activity-icon-bg" };
+				}
 
-					let artHtml = "";
-					if (mainImageSrc) {
-						artHtml = `<img src="${mainImageSrc}" alt="" data-act-name="${escapeHTML(act.name || '')}" data-act-type="${act.type || 0}" onerror="handleActivityImgError(this, '${act.application_id || ''}')" />`;
-						if (largeUrl && smallUrl && largeUrl !== smallUrl) {
-							artHtml += `<img class="activity-small-badge" src="${smallUrl}" alt="" onerror="this.style.display='none'" />`;
+				return { iconClass: "fa-solid fa-gamepad", color: "#a855f7", bgIconClass: "fa-solid fa-gamepad activity-icon-bg" };
+			}
+
+			function handleActivityImgError(imgEl, appId) {
+				if (!imgEl) return;
+				if (appId && appId !== 'spotify' && !imgEl.dataset.triedAppIcon) {
+					imgEl.dataset.triedAppIcon = 'true';
+					imgEl.src = `https://cdn.discordapp.com/app-icons/${appId}/icon.png?size=256`;
+				} else {
+					if (imgEl.parentElement) {
+						const actName = imgEl.dataset.actName || "";
+						const actType = parseInt(imgEl.dataset.actType || "0");
+						const info = getActivityIconInfo(actName, actType);
+						if (info.svg) {
+							imgEl.parentElement.innerHTML = info.svg;
+						} else {
+							imgEl.parentElement.innerHTML = `<i class="${info.iconClass}" style="color:${info.color}; font-size:24px;"></i>`;
 						}
-					} else if (iconInfo.svg) {
-						artHtml = iconInfo.svg;
-					} else {
-						artHtml = `<i class="${iconInfo.iconClass}" style="color:${iconInfo.color}; font-size:24px;"></i>`;
 					}
-
-					let subText = act.details ? (act.state ? `${act.details} — ${act.state}` : act.details) : (act.state || "Active on Discord");
-
-					activeList.push({
-						isGame: true,
-						bgIconClass: bgIconClass,
-						header: act.type === 0 ? "PLAYING A GAME" : (act.type === 3 ? "WATCHING" : (act.type === 1 ? "STREAMING" : "ACTIVE NOW")),
-						title: act.name || "Custom Activity",
-						sub: subText,
-						artHtml: artHtml
-					});
-				});
+				}
 			}
 
-			if (activeList.length > 0) {
-				activitiesWrapper.innerHTML = activeList.map(item => `
+			function applyPresenceData(data) {
+				if (!data) return;
+				const user = data.discord_user;
+
+				if (user) {
+					usernameEl.textContent = user.global_name || user.username || "pray";
+					fetchedDiscordUsername = user.username || user.global_name || "";
+					const userHandleEl = document.getElementById("user-handle");
+					if (userHandleEl) {
+						userHandleEl.textContent = user.username ? `@${user.username}` : "";
+					}
+					if (user.avatar) {
+						const ext = user.avatar.startsWith("a_") ? "gif" : "png";
+						avatarEl.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${ext}?size=256`;
+					}
+				}
+
+				const customStatus = data.activities?.find(a => a.type === 4);
+				const statusBubble = document.getElementById("status-bubble");
+				if (statusBubble) {
+					if (customStatus) {
+						let html = "";
+						if (customStatus.emoji) {
+							if (customStatus.emoji.id) {
+								const ext = customStatus.emoji.animated ? "gif" : "png";
+								html += `<img src="https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${ext}" style="width:16px;height:16px;object-fit:contain;margin-right:5px;" alt="" />`;
+							} else if (customStatus.emoji.name) {
+								html += `<span style="margin-right:5px;">${customStatus.emoji.name}</span>`;
+							}
+						}
+						if (customStatus.state) {
+							html += customStatus.state;
+						}
+						statusBubble.innerHTML = html;
+						statusBubble.classList.toggle('visible', html.trim().length > 0);
+					} else {
+						statusBubble.innerHTML = "";
+						statusBubble.classList.remove('visible');
+					}
+				}
+
+				const st = data.discord_status || "offline";
+				statusBadgeEl.innerHTML = STATUS_SVGS[st] || STATUS_SVGS.offline;
+
+				const activitiesWrapper = document.getElementById("activities-wrapper");
+				if (!activitiesWrapper) return;
+
+				const activeList = [];
+
+				const spotifyData = data.spotify;
+				const spotifyAct = !spotifyData && data.activities ? data.activities.find(a => a.name === "Spotify" || a.type === 2) : null;
+
+				if (spotifyData) {
+					activeList.push({
+						isSpotify: true,
+						bgIconClass: "fa-brands fa-spotify activity-icon-bg",
+						header: "LISTENING TO SPOTIFY",
+						title: spotifyData.song,
+						sub: `by ${spotifyData.artist}`,
+						artHtml: `<img src="${spotifyData.album_art_url}" alt="" onerror="handleActivityImgError(this, 'spotify')" />`
+					});
+				} else if (spotifyAct) {
+					let artUrl = getActivityAssetUrl(spotifyAct.assets?.large_image || spotifyAct.assets?.small_image, spotifyAct.application_id);
+					activeList.push({
+						isSpotify: true,
+						bgIconClass: "fa-brands fa-spotify activity-icon-bg",
+						header: "LISTENING TO SPOTIFY",
+						title: spotifyAct.details || "Spotify",
+						sub: spotifyAct.state ? `by ${spotifyAct.state}` : "",
+						artHtml: artUrl ? `<img src="${artUrl}" alt="" onerror="handleActivityImgError(this, 'spotify')" />` : `<i class="fa-brands fa-spotify" style="color:#1db954; font-size:24px;"></i>`
+					});
+				}
+
+				if (data.activities && data.activities.length > 0) {
+					const nonStatusActivities = data.activities.filter(a => a.type !== 4 && a.name !== "Spotify" && a.type !== 2);
+
+					nonStatusActivities.forEach(act => {
+						const iconInfo = getActivityIconInfo(act.name, act.type);
+						let bgIconClass = iconInfo.bgIconClass;
+
+						const largeUrl = getActivityAssetUrl(act.assets?.large_image, act.application_id);
+						const smallUrl = getActivityAssetUrl(act.assets?.small_image, act.application_id);
+
+						let mainImageSrc = largeUrl || smallUrl;
+						if (!mainImageSrc && act.application_id) {
+							mainImageSrc = `https://cdn.discordapp.com/app-icons/${act.application_id}/icon.png?size=256`;
+						}
+
+						let artHtml = "";
+						if (mainImageSrc) {
+							artHtml = `<img src="${mainImageSrc}" alt="" data-act-name="${escapeHTML(act.name || '')}" data-act-type="${act.type || 0}" onerror="handleActivityImgError(this, '${act.application_id || ''}')" />`;
+							if (largeUrl && smallUrl && largeUrl !== smallUrl) {
+								artHtml += `<img class="activity-small-badge" src="${smallUrl}" alt="" onerror="this.style.display='none'" />`;
+							}
+						} else if (iconInfo.svg) {
+							artHtml = iconInfo.svg;
+						} else {
+							artHtml = `<i class="${iconInfo.iconClass}" style="color:${iconInfo.color}; font-size:24px;"></i>`;
+						}
+
+						let subText = act.details ? (act.state ? `${act.details} — ${act.state}` : act.details) : (act.state || "Active on Discord");
+
+						activeList.push({
+							isGame: true,
+							bgIconClass: bgIconClass,
+							header: act.type === 0 ? "PLAYING A GAME" : (act.type === 3 ? "WATCHING" : (act.type === 1 ? "STREAMING" : "ACTIVE NOW")),
+							title: act.name || "Custom Activity",
+							sub: subText,
+							artHtml: artHtml
+						});
+					});
+				}
+
+				if (activeList.length > 0) {
+					activitiesWrapper.innerHTML = activeList.map(item => `
 					<div class="card activity-card ${item.isSpotify ? 'spotify-active' : 'game-active'}">
 						<i class="${item.bgIconClass}"></i>
 						<div class="activity-art-wrap">
@@ -2009,8 +1673,8 @@
 						</div>
 					</div>
 				`).join("");
-			} else {
-				activitiesWrapper.innerHTML = `
+				} else {
+					activitiesWrapper.innerHTML = `
 					<div class="card activity-card">
 						<i class="fa-solid fa-moon activity-icon-bg"></i>
 						<div class="activity-art-wrap">
@@ -2023,183 +1687,183 @@
 						</div>
 					</div>
 				`;
+				}
 			}
-		}
 
-		let socket = null;
-		let heartbeatInterval = null;
+			let socket = null;
+			let heartbeatInterval = null;
 
-		function connectLanyardWebSocket() {
-			if (socket) socket.close();
-			socket = new WebSocket("wss://api.lanyard.rest/socket");
+			function connectLanyardWebSocket() {
+				if (socket) socket.close();
+				socket = new WebSocket("wss://api.lanyard.rest/socket");
 
-			socket.onmessage = (event) => {
-				const message = JSON.parse(event.data);
-				if (message.op === 1) {
-					if (heartbeatInterval) clearInterval(heartbeatInterval);
-					heartbeatInterval = setInterval(() => {
-						if (socket && socket.readyState === WebSocket.OPEN) {
-							socket.send(JSON.stringify({ op: 3 }));
+				socket.onmessage = (event) => {
+					const message = JSON.parse(event.data);
+					if (message.op === 1) {
+						if (heartbeatInterval) clearInterval(heartbeatInterval);
+						heartbeatInterval = setInterval(() => {
+							if (socket && socket.readyState === WebSocket.OPEN) {
+								socket.send(JSON.stringify({ op: 3 }));
+							}
+						}, message.d.heartbeat_interval);
+
+						socket.send(JSON.stringify({
+							op: 2,
+							d: { subscribe_to_id: DISCORD_ID }
+						}));
+					}
+
+					if (message.t === "INIT_STATE" || message.t === "PRESENCE_UPDATE") {
+						if (message.d) {
+							applyPresenceData(message.d);
 						}
-					}, message.d.heartbeat_interval);
-
-					socket.send(JSON.stringify({
-						op: 2,
-						d: { subscribe_to_id: DISCORD_ID }
-					}));
-				}
-
-				if (message.t === "INIT_STATE" || message.t === "PRESENCE_UPDATE") {
-					if (message.d) {
-						applyPresenceData(message.d);
 					}
-				}
-			};
+				};
 
-			socket.onclose = () => {
-				if (heartbeatInterval) clearInterval(heartbeatInterval);
-				setTimeout(connectLanyardWebSocket, 5000);
-			};
-		}
+				socket.onclose = () => {
+					if (heartbeatInterval) clearInterval(heartbeatInterval);
+					setTimeout(connectLanyardWebSocket, 5000);
+				};
+			}
 
-		async function fetchTrackData(trackName, artistName) {
-			if (!trackName || !artistName) return { artUrl: null, previewUrl: null };
-			const cleanTitle = trackName.replace(/[\(\[\{].*?[\)\]\}]/g, '').trim();
-			const query = encodeURIComponent(`${artistName} ${cleanTitle}`);
+			async function fetchTrackData(trackName, artistName) {
+				if (!trackName || !artistName) return { artUrl: null, previewUrl: null };
+				const cleanTitle = trackName.replace(/[\(\[\{].*?[\)\]\}]/g, '').trim();
+				const query = encodeURIComponent(`${artistName} ${cleanTitle}`);
 
-			try {
-				const res = await fetch(`https://itunes.apple.com/search?term=${query}&entity=song&limit=1`);
-				if (res.ok) {
-					const data = await res.json();
-					if (data.results && data.results.length > 0) {
-						const item = data.results[0];
-						return {
-							artUrl: item.artworkUrl100 ? item.artworkUrl100.replace('100x100bb', '300x300bb') : null,
-							previewUrl: item.previewUrl || null
-						};
-					}
-				}
-			} catch (e) { }
-
-			return { artUrl: null, previewUrl: null };
-		}
-
-		function formatTimeAgo(timestamp) {
-			const seconds = Math.floor((Date.now() / 1000) - timestamp);
-			if (seconds < 60) return "just now";
-			const minutes = Math.floor(seconds / 60);
-			if (minutes < 60) return `${minutes}m ago`;
-			const hours = Math.floor(minutes / 60);
-			if (hours < 24) return `${hours}h ago`;
-			const days = Math.floor(hours / 24);
-			return `${days}d ago`;
-		}
-
-		async function fetchRecentPlays() {
-			try {
-				const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&limit=50&format=json`;
-				const res = await fetch(url);
-				if (res.ok) {
-					const json = await res.json();
-					let rawTracks = json.recenttracks?.track || [];
-					if (!Array.isArray(rawTracks)) {
-						rawTracks = [rawTracks];
-					}
-
-					if (rawTracks.length > 0) {
-						allFetchedTracks = rawTracks.map(track => {
-							const artist = typeof track.artist === 'string' ? track.artist : (track.artist?.['#text'] || track.artist?.name || 'Unknown Artist');
-							const name = track.name || 'Unknown Track';
-							let imgUrl = '';
-							if (Array.isArray(track.image)) {
-								imgUrl = track.image[3]?.['#text'] || track.image[2]?.['#text'] || track.image[1]?.['#text'] || '';
-							}
-							if (imgUrl.includes("2a96cbd8b46e442fc41c2b86b821562f")) {
-								imgUrl = '';
-							}
-
-							let timeAgo = "recently";
-							if (track['@attr']?.nowplaying === "true") {
-								timeAgo = "Now playing";
-							} else if (track.date?.uts) {
-								timeAgo = formatTimeAgo(parseInt(track.date.uts));
-							}
-
+				try {
+					const res = await fetch(`https://itunes.apple.com/search?term=${query}&entity=song&limit=1`);
+					if (res.ok) {
+						const data = await res.json();
+						if (data.results && data.results.length > 0) {
+							const item = data.results[0];
 							return {
-								name,
-								artist,
-								resolvedImage: imgUrl || "https://cdn.discordapp.com/embed/avatars/0.png",
-								previewUrl: null,
-								timeAgo
+								artUrl: item.artworkUrl100 ? item.artworkUrl100.replace('100x100bb', '300x300bb') : null,
+								previewUrl: item.previewUrl || null
 							};
-						});
-
-						renderTracks(allFetchedTracks);
-						return;
+						}
 					}
-				}
-			} catch (e) {
-				console.error("Last.fm fetch error:", e);
+				} catch (e) { }
+
+				return { artUrl: null, previewUrl: null };
 			}
 
-			await fetchFallbackStreams();
-		}
+			function formatTimeAgo(timestamp) {
+				const seconds = Math.floor((Date.now() / 1000) - timestamp);
+				if (seconds < 60) return "just now";
+				const minutes = Math.floor(seconds / 60);
+				if (minutes < 60) return `${minutes}m ago`;
+				const hours = Math.floor(minutes / 60);
+				if (hours < 24) return `${hours}h ago`;
+				const days = Math.floor(hours / 24);
+				return `${days}d ago`;
+			}
 
-		async function fetchFallbackStreams() {
-			let fallbackTracks = [];
-			try {
-				const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-				if (res.ok) {
-					const data = await res.json();
-					if (data.success && data.data?.spotify) {
-						const sp = data.data.spotify;
-						fallbackTracks.push({
-							name: sp.song,
-							artist: sp.artist,
-							resolvedImage: sp.album_art_url || "https://cdn.discordapp.com/embed/avatars/0.png",
-							previewUrl: null,
-							timeAgo: "Now playing"
-						});
+			async function fetchRecentPlays() {
+				try {
+					const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&limit=50&format=json`;
+					const res = await fetch(url);
+					if (res.ok) {
+						const json = await res.json();
+						let rawTracks = json.recenttracks?.track || [];
+						if (!Array.isArray(rawTracks)) {
+							rawTracks = [rawTracks];
+						}
+
+						if (rawTracks.length > 0) {
+							allFetchedTracks = rawTracks.map(track => {
+								const artist = typeof track.artist === 'string' ? track.artist : (track.artist?.['#text'] || track.artist?.name || 'Unknown Artist');
+								const name = track.name || 'Unknown Track';
+								let imgUrl = '';
+								if (Array.isArray(track.image)) {
+									imgUrl = track.image[3]?.['#text'] || track.image[2]?.['#text'] || track.image[1]?.['#text'] || '';
+								}
+								if (imgUrl.includes("2a96cbd8b46e442fc41c2b86b821562f")) {
+									imgUrl = '';
+								}
+
+								let timeAgo = "recently";
+								if (track['@attr']?.nowplaying === "true") {
+									timeAgo = "Now playing";
+								} else if (track.date?.uts) {
+									timeAgo = formatTimeAgo(parseInt(track.date.uts));
+								}
+
+								return {
+									name,
+									artist,
+									resolvedImage: imgUrl || "https://cdn.discordapp.com/embed/avatars/0.png",
+									previewUrl: null,
+									timeAgo
+								};
+							});
+
+							renderTracks(allFetchedTracks);
+							return;
+						}
 					}
+				} catch (e) {
+					console.error("Last.fm fetch error:", e);
 				}
-			} catch (e) { }
 
-			if (fallbackTracks.length === 0) {
-				fallbackTracks = [
-					{ name: "Goth", artist: "Sidewalks and Skeletons", resolvedImage: "https://i.scdn.co/image/ab67616d0000b27389a9f24303bc1fb9d1872df8", previewUrl: null, timeAgo: "10m ago" },
-					{ name: "Resonance", artist: "HOME", resolvedImage: "https://i.scdn.co/image/ab67616d0000b27376c6a46174a7b5bb48bf2b73", previewUrl: null, timeAgo: "1h ago" },
-					{ name: "After Dark", artist: "Mr.Kitty", resolvedImage: "https://i.scdn.co/image/ab67616d0000b27341e3d368d4f4ea7c89f5f590", previewUrl: null, timeAgo: "3h ago" },
-					{ name: "Lsd", artist: "Ghoul", resolvedImage: "https://i.scdn.co/image/ab67616d0000b273574c87893ebef7efc5d1fa29", previewUrl: null, timeAgo: "5h ago" }
-				];
+				await fetchFallbackStreams();
 			}
 
-			allFetchedTracks = fallbackTracks;
-			renderTracks(allFetchedTracks);
-		}
+			async function fetchFallbackStreams() {
+				let fallbackTracks = [];
+				try {
+					const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+					if (res.ok) {
+						const data = await res.json();
+						if (data.success && data.data?.spotify) {
+							const sp = data.data.spotify;
+							fallbackTracks.push({
+								name: sp.song,
+								artist: sp.artist,
+								resolvedImage: sp.album_art_url || "https://cdn.discordapp.com/embed/avatars/0.png",
+								previewUrl: null,
+								timeAgo: "Now playing"
+							});
+						}
+					}
+				} catch (e) { }
 
-		function handleImageFallback(imgEl, title, artist) {
-			fetchTrackData(title, artist).then(data => {
-				if (data.artUrl) {
-					imgEl.src = data.artUrl;
+				if (fallbackTracks.length === 0) {
+					fallbackTracks = [
+						{ name: "Goth", artist: "Sidewalks and Skeletons", resolvedImage: "https://i.scdn.co/image/ab67616d0000b27389a9f24303bc1fb9d1872df8", previewUrl: null, timeAgo: "10m ago" },
+						{ name: "Resonance", artist: "HOME", resolvedImage: "https://i.scdn.co/image/ab67616d0000b27376c6a46174a7b5bb48bf2b73", previewUrl: null, timeAgo: "1h ago" },
+						{ name: "After Dark", artist: "Mr.Kitty", resolvedImage: "https://i.scdn.co/image/ab67616d0000b27341e3d368d4f4ea7c89f5f590", previewUrl: null, timeAgo: "3h ago" },
+						{ name: "Lsd", artist: "Ghoul", resolvedImage: "https://i.scdn.co/image/ab67616d0000b273574c87893ebef7efc5d1fa29", previewUrl: null, timeAgo: "5h ago" }
+					];
 				}
-				imgEl.onerror = null;
-			});
-		}
 
-		function renderTracks(tracksList) {
-			if (!tracksList || tracksList.length === 0) {
-				tracksFeed.innerHTML = `<div style="color:#64748b; font-size:11px; text-align:center; padding: 20px;">No matching tracks found.</div>`;
-				return;
+				allFetchedTracks = fallbackTracks;
+				renderTracks(allFetchedTracks);
 			}
 
-			let html = "";
-			tracksList.forEach((track) => {
-				const name = track.name || "Unknown Track";
-				const artist = typeof track.artist === 'string' ? track.artist : (track.artist?.['#text'] || "Unknown Artist");
-				const img = track.resolvedImage || "https://cdn.discordapp.com/embed/avatars/0.png";
-				const timeAgo = track.timeAgo || "recently";
+			function handleImageFallback(imgEl, title, artist) {
+				fetchTrackData(title, artist).then(data => {
+					if (data.artUrl) {
+						imgEl.src = data.artUrl;
+					}
+					imgEl.onerror = null;
+				});
+			}
 
-				html += `
+			function renderTracks(tracksList) {
+				if (!tracksList || tracksList.length === 0) {
+					tracksFeed.innerHTML = `<div style="color:#64748b; font-size:11px; text-align:center; padding: 20px;">No matching tracks found.</div>`;
+					return;
+				}
+
+				let html = "";
+				tracksList.forEach((track) => {
+					const name = track.name || "Unknown Track";
+					const artist = typeof track.artist === 'string' ? track.artist : (track.artist?.['#text'] || "Unknown Artist");
+					const img = track.resolvedImage || "https://cdn.discordapp.com/embed/avatars/0.png";
+					const timeAgo = track.timeAgo || "recently";
+
+					html += `
 					<div class="track-item">
 						<div class="track-left">
 							<div class="track-art-container" onclick="playSongSnippet('${escapeJs(name)}', '${escapeJs(artist)}', '${img}', '${track.previewUrl || ''}')">
@@ -2218,665 +1882,351 @@
 						</div>
 					</div>
 				`;
-			});
-
-			tracksFeed.innerHTML = html;
-		}
-
-		function filterTracks() {
-			const query = document.getElementById("search-input").value.toLowerCase().trim();
-			if (!query) {
-				renderTracks(allFetchedTracks);
-				return;
-			}
-
-			const filtered = allFetchedTracks.filter(track => {
-				const name = (track.name || "").toLowerCase();
-				const artist = (track.artist?.['#text'] || "").toLowerCase();
-				return name.includes(query) || artist.includes(query);
-			});
-
-			renderTracks(filtered);
-		}
-
-		async function playSongSnippet(title, artist, art, knownPreview) {
-			playerTitle.textContent = title;
-			playerArtist.textContent = artist;
-			playerArt.src = art;
-
-			let audioUrl = knownPreview;
-			if (!audioUrl) {
-				const trackInfo = await fetchTrackData(title, artist);
-				audioUrl = trackInfo.previewUrl;
-				if (trackInfo.artUrl) playerArt.src = trackInfo.artUrl;
-			}
-
-			if (!audioUrl) {
-				alert("No audio snippet available for this track.");
-				return;
-			}
-
-			audioElement.src = audioUrl;
-			audioElement.volume = volumeSlider.value / 100;
-			audioElement.play();
-
-			playPauseIcon.className = "fa-solid fa-pause";
-			playerBar.classList.add("active");
-		}
-
-		function togglePlayPause() {
-			if (audioElement.paused) {
-				audioElement.play();
-				playPauseIcon.className = "fa-solid fa-pause";
-			} else {
-				audioElement.pause();
-				playPauseIcon.className = "fa-solid fa-play";
-			}
-		}
-
-		function setVolume(val) {
-			audioElement.volume = val / 100;
-			volumeVal.textContent = `${val}%`;
-		}
-
-		function seekAudio(val) {
-			if (audioElement.duration) {
-				audioElement.currentTime = (val / 100) * audioElement.duration;
-			}
-		}
-
-		audioElement.addEventListener("timeupdate", () => {
-			if (audioElement.duration) {
-				const pct = (audioElement.currentTime / audioElement.duration) * 100;
-				seekSlider.value = pct;
-				currentTimeLbl.textContent = formatTime(audioElement.currentTime);
-				totalDurationLbl.textContent = formatTime(audioElement.duration);
-			}
-		});
-
-		audioElement.addEventListener("ended", () => {
-			playPauseIcon.className = "fa-solid fa-play";
-			seekSlider.value = 0;
-		});
-
-		function formatTime(seconds) {
-			const mins = Math.floor(seconds / 60);
-			const secs = Math.floor(seconds % 60);
-			return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-		}
-
-		function closePlayer() {
-			audioElement.pause();
-			audioElement.src = "";
-			playerBar.classList.remove("active");
-		}
-
-		function escapeHTML(str) {
-			return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
-		}
-
-		function escapeJs(str) {
-			return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-		}
-
-		function spawnParticles() {
-			const dylanEl = document.getElementById("dylan-target");
-			if (dylanEl) {
-				const p = document.createElement("span");
-				p.className = "particle-uwu";
-				p.textContent = ["</3", ":(", ";(", ":/"][Math.floor(Math.random() * 4)];
-				p.style.left = (Math.random() * 20 - 5) + "px";
-				p.style.top = "5px";
-
-				const angle = Math.random() * Math.PI * 2;
-				const dist = 20 + Math.random() * 25;
-				const tx = Math.cos(angle) * dist + "px";
-				const ty = Math.sin(angle) * dist + "px";
-
-				p.style.setProperty('--tx', tx);
-				p.style.setProperty('--ty', ty);
-
-				dylanEl.appendChild(p);
-				setTimeout(() => p.remove(), 2200);
-			}
-
-			const loveEl = document.getElementById("love-target");
-			if (loveEl) {
-				const p = document.createElement("span");
-				p.className = "particle-heart";
-				p.textContent = "<3";
-				p.style.left = (Math.random() * 25 - 5) + "px";
-				p.style.top = "5px";
-
-				const angle = Math.random() * Math.PI * 2;
-				const dist = 20 + Math.random() * 25;
-				const tx = Math.cos(angle) * dist + "px";
-				const ty = Math.sin(angle) * dist + "px";
-
-				p.style.setProperty('--tx', tx);
-				p.style.setProperty('--ty', ty);
-
-				loveEl.appendChild(p);
-				setTimeout(() => p.remove(), 2000);
-			}
-
-			const devEl = document.getElementById("dev-target");
-			if (devEl) {
-				const p = document.createElement("span");
-				p.className = "particle-code";
-				p.textContent = ["</>", "{ }", "<>"][Math.floor(Math.random() * 3)];
-				p.style.left = (Math.random() * 30 - 5) + "px";
-				p.style.top = "5px";
-
-				const angle = Math.random() * Math.PI * 2;
-				const dist = 20 + Math.random() * 25;
-				const tx = Math.cos(angle) * dist + "px";
-				const ty = Math.sin(angle) * dist + "px";
-
-				p.style.setProperty('--tx', tx);
-				p.style.setProperty('--ty', ty);
-
-				devEl.appendChild(p);
-				setTimeout(() => p.remove(), 2000);
-			}
-		}
-		setInterval(spawnParticles, 700);
-
-		function spawnButtonSparkle(e, btn, color) {
-			const rect = btn.getBoundingClientRect();
-			const sparkle = document.createElement("div");
-			sparkle.className = "btn-sparkle";
-			const chosenColor = Array.isArray(color) ? color[Math.floor(Math.random() * color.length)] : color;
-			sparkle.style.background = chosenColor;
-			sparkle.style.boxShadow = `0 0 8px ${chosenColor}`;
-			sparkle.style.left = (e.clientX - rect.left) + "px";
-			sparkle.style.top = (e.clientY - rect.top) + "px";
-
-			const dx = (Math.random() - 0.5) * 35 + "px";
-			const dy = (Math.random() - 0.5) * 35 + "px";
-			sparkle.style.setProperty('--dx', dx);
-			sparkle.style.setProperty('--dy', dy);
-
-			btn.appendChild(sparkle);
-			setTimeout(() => sparkle.remove(), 1200);
-		}
-
-		const gibberishChars = "123456789";
-		function updateGibberish() {
-			const gibEl = document.getElementById("gibberish-target");
-			if (gibEl) {
-				let result = "";
-				for (let i = 0; i < 2; i++) {
-					result += gibberishChars.charAt(Math.floor(Math.random() * gibberishChars.length));
-				}
-				gibEl.textContent = result + "";
-			}
-		}
-		setInterval(updateGibberish, 35);
-
-		const COMMENT_COOLDOWN_SECONDS = 45;
-		let commentCooldownTimer = null;
-		let activeReplyTarget = null;
-
-		const DEFAULT_COMMENTS = [];
-
-		const BLOCKED_PATTERNS = [
-			/n+[i1!l]+g+[e3a4r]+/,
-			/n+[i1!l]+g+[a4]/,
-			/f+[a4]+g+[o0]+t+/,
-			/f+[a4]+g+s?$/,
-			/f+[a4]+g+[^a-z]/,
-			/k+[y1!]+s+/,
-			/r+[e3]+t+[a4]+r+d+/,
-			/c+[u0]+n+t+/,
-			/t+[r]+[a4]+n+n+[y1!]+/,
-			/c+[h]+[i1!]+n+k+/,
-			/g+[o0]+o+k+/,
-			/k+[i1!]+k+[e3]+/,
-			/w+[e3]+t+b+[a4]+c+k+/,
-			/d+[i1!]+k+[e3]+/
-		];
-
-		function cleanForCheck(str) {
-			return (str || "").toLowerCase()
-				.replace(/[@4]/g, 'a')
-				.replace(/[1!|]/g, 'i')
-				.replace(/[0]/g, 'o')
-				.replace(/[3]/g, 'e')
-				.replace(/[$5]/g, 's')
-				.replace(/[7]/g, 't')
-				.replace(/[8]/g, 'b')
-				.replace(/[^a-z]/g, '');
-		}
-
-		function isProhibited(text) {
-			if (!text) return false;
-			const raw = text.toLowerCase();
-			const cleaned = cleanForCheck(text);
-			for (const pat of BLOCKED_PATTERNS) {
-				if (pat.test(raw) || pat.test(cleaned)) return true;
-			}
-			return false;
-		}
-
-		function formatCommentTime(timestamp) {
-			const diffSec = Math.floor((Date.now() - timestamp) / 1000);
-			if (diffSec < 60) return "Just now";
-			const diffMin = Math.floor(diffSec / 60);
-			if (diffMin < 60) return `${diffMin}m ago`;
-			const diffHour = Math.floor(diffMin / 60);
-			if (diffHour < 24) return `${diffHour}h ago`;
-			const diffDays = Math.floor(diffHour / 24);
-			if (diffDays < 7) return `${diffDays}d ago`;
-			return new Date(timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-		}
-
-		function getStoredComments() {
-			try {
-				const raw = localStorage.getItem("catboys_comments_list");
-				if (raw) {
-					const parsed = JSON.parse(raw);
-					if (Array.isArray(parsed)) return parsed;
-				}
-			} catch (e) { }
-			return DEFAULT_COMMENTS;
-		}
-
-		function saveComments(list) {
-			try {
-				localStorage.setItem("catboys_comments_list", JSON.stringify(list));
-			} catch (e) { }
-		}
-
-		function startReply(id, name) {
-			activeReplyTarget = { id, name };
-			const banner = document.getElementById("replying-banner");
-			const targetNameEl = document.getElementById("reply-target-name");
-			const msgInput = document.getElementById("comment-msg-input");
-
-			if (targetNameEl) targetNameEl.textContent = `@${name}`;
-			if (banner) banner.classList.add("active");
-			if (msgInput) msgInput.focus();
-		}
-
-		function cancelReply() {
-			activeReplyTarget = null;
-			const banner = document.getElementById("replying-banner");
-			if (banner) banner.classList.remove("active");
-		}
-
-		function renderComments() {
-			const listEl = document.getElementById("comments-list");
-			const countBadge = document.getElementById("comments-tab-count");
-			const comments = getStoredComments();
-
-			if (countBadge) {
-				countBadge.textContent = `${comments.length} comment${comments.length === 1 ? '' : 's'}`;
-			}
-
-			if (!listEl) return;
-
-			if (comments.length === 0) {
-				listEl.innerHTML = `
-					<div style="color: #64748b; font-size: 11px; text-align: center; padding: 25px 10px;">
-						No comments yet. Be the first to leave a note!
-					</div>
-				`;
-				return;
-			}
-
-			let likedMap = {};
-			try {
-				likedMap = JSON.parse(localStorage.getItem("catboys_liked_comments") || "{}");
-			} catch (e) { }
-
-			listEl.innerHTML = comments.map(c => {
-				const isLiked = !!likedMap[c.id];
-				const timeStr = formatCommentTime(c.time || Date.now());
-				const replyHtml = c.replyTo ? `<div class="comment-reply-badge"><i class="fa-solid fa-reply"></i> @${escapeHTML(c.replyTo.name)}</div>` : '';
-
-				return `
-					<div class="comment-item">
-						<div class="comment-content">
-							<div class="comment-header-row">
-								<span class="comment-author">${escapeHTML(c.name)}</span>
-								<span class="comment-time">${escapeHTML(timeStr)}</span>
-							</div>
-							${replyHtml}
-							<div class="comment-body">${escapeHTML(c.text)}</div>
-							<div class="comment-actions">
-								<button type="button" class="comment-like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLikeComment(${c.id}, this)">
-									<i class="fa-${isLiked ? 'solid' : 'regular'} fa-heart"></i>
-									<span>${c.likes || 0}</span>
-								</button>
-								<button type="button" class="comment-reply-btn" onclick="startReply(${c.id}, '${escapeHTML(c.name).replace(/'/g, "\\'")}')">
-									<i class="fa-solid fa-reply"></i> Reply
-								</button>
-							</div>
-						</div>
-					</div>
-				`;
-			}).join('');
-		}
-
-		function toggleLikeComment(commentId, btn) {
-			const comments = getStoredComments();
-			const target = comments.find(c => c.id === commentId);
-			if (!target) return;
-
-			let likedMap = {};
-			try {
-				likedMap = JSON.parse(localStorage.getItem("catboys_liked_comments") || "{}");
-			} catch (e) { }
-
-			if (likedMap[commentId]) {
-				target.likes = Math.max(0, (target.likes || 1) - 1);
-				delete likedMap[commentId];
-			} else {
-				target.likes = (target.likes || 0) + 1;
-				likedMap[commentId] = true;
-				if (btn) spawnButtonSparkle({ clientX: event?.clientX || 0, clientY: event?.clientY || 0 }, btn, '#f43f5e');
-			}
-
-			localStorage.setItem("catboys_liked_comments", JSON.stringify(likedMap));
-			saveComments(comments);
-			renderComments();
-		}
-
-		function updateCooldownUI() {
-			const submitBtn = document.getElementById("comment-submit-btn");
-			const submitTxt = document.getElementById("comment-submit-txt");
-			const submitIcon = document.getElementById("comment-submit-icon");
-			const feedbackMsg = document.getElementById("comment-feedback-msg");
-
-			const lastTime = parseInt(localStorage.getItem("catboys_last_comment_time") || "0");
-			const now = Date.now();
-			const elapsedSec = Math.floor((now - lastTime) / 1000);
-			const remaining = COMMENT_COOLDOWN_SECONDS - elapsedSec;
-
-			if (remaining > 0) {
-				if (submitBtn) submitBtn.disabled = true;
-				if (submitTxt) submitTxt.textContent = `${remaining}s`;
-				if (submitIcon) submitIcon.className = "fa-solid fa-clock";
-				if (feedbackMsg && feedbackMsg.textContent.includes("Cooldown")) {
-					feedbackMsg.textContent = `Cooldown: please wait ${remaining}s before posting again.`;
-				}
-				if (!commentCooldownTimer) {
-					commentCooldownTimer = setInterval(updateCooldownUI, 1000);
-				}
-			} else {
-				if (submitBtn) submitBtn.disabled = false;
-				if (submitTxt) submitTxt.textContent = "Post";
-				if (submitIcon) submitIcon.className = "fa-solid fa-paper-plane";
-				if (feedbackMsg && feedbackMsg.textContent.includes("Cooldown")) {
-					feedbackMsg.textContent = "";
-				}
-				if (commentCooldownTimer) {
-					clearInterval(commentCooldownTimer);
-					commentCooldownTimer = null;
-				}
-			}
-		}
-
-		function handleCommentSubmit(e) {
-			e.preventDefault();
-			const nameInput = document.getElementById("comment-name-input");
-			const msgInput = document.getElementById("comment-msg-input");
-			const feedbackMsg = document.getElementById("comment-feedback-msg");
-			const submitBtn = document.getElementById("comment-submit-btn");
-
-			const lastTime = parseInt(localStorage.getItem("catboys_last_comment_time") || "0");
-			const elapsedSec = Math.floor((Date.now() - lastTime) / 1000);
-			const remaining = COMMENT_COOLDOWN_SECONDS - elapsedSec;
-
-			if (remaining > 0) {
-				if (feedbackMsg) {
-					feedbackMsg.className = "comment-feedback-msg";
-					feedbackMsg.textContent = `Cooldown: please wait ${remaining}s before posting again.`;
-				}
-				return;
-			}
-
-			const name = (nameInput?.value || "").trim();
-			const msg = (msgInput?.value || "").trim();
-
-			if (!name) {
-				if (feedbackMsg) {
-					feedbackMsg.className = "comment-feedback-msg";
-					feedbackMsg.textContent = "Please enter your name.";
-				}
-				if (nameInput) nameInput.focus();
-				return;
-			}
-
-			if (isProhibited(name)) {
-				if (feedbackMsg) {
-					feedbackMsg.className = "comment-feedback-msg";
-					feedbackMsg.textContent = "Inappropriate name detected.";
-				}
-				if (nameInput) nameInput.focus();
-				return;
-			}
-
-			if (!msg) {
-				if (feedbackMsg) {
-					feedbackMsg.className = "comment-feedback-msg";
-					feedbackMsg.textContent = "Please write a comment.";
-				}
-				if (msgInput) msgInput.focus();
-				return;
-			}
-
-			if (isProhibited(msg)) {
-				if (feedbackMsg) {
-					feedbackMsg.className = "comment-feedback-msg";
-					feedbackMsg.textContent = "Inappropriate language detected.";
-				}
-				if (msgInput) msgInput.focus();
-				return;
-			}
-
-			const newComment = {
-				id: Date.now(),
-				name: name.slice(0, 20),
-				text: msg.slice(0, 140),
-				time: Date.now(),
-				likes: 0
-			};
-
-			if (activeReplyTarget) {
-				newComment.replyTo = {
-					id: activeReplyTarget.id,
-					name: activeReplyTarget.name
-				};
-				cancelReply();
-			}
-
-			const list = getStoredComments();
-			list.unshift(newComment);
-			saveComments(list);
-
-			localStorage.setItem("catboys_last_comment_time", Date.now().toString());
-
-			if (msgInput) msgInput.value = "";
-			if (feedbackMsg) {
-				feedbackMsg.className = "comment-feedback-msg success";
-				feedbackMsg.textContent = "Comment posted!";
-				setTimeout(() => {
-					if (feedbackMsg.textContent === "Comment posted!") feedbackMsg.textContent = "";
-				}, 2500);
-			}
-
-			if (submitBtn) {
-				spawnButtonSparkle({ clientX: e.clientX || 0, clientY: e.clientY || 0 }, submitBtn, '#ffffff');
-			}
-
-			renderComments();
-			updateCooldownUI();
-
-			const listEl = document.getElementById("comments-list");
-			if (listEl) listEl.scrollTop = 0;
-		}
-
-		function initCommentsSection() {
-			const nameInput = document.getElementById("comment-name-input");
-			if (nameInput) {
-				nameInput.value = "";
-			}
-			renderComments();
-			updateCooldownUI();
-		}
-
-		async function fetchLanyardRest() {
-			try {
-				const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
-				if (!res.ok) return;
-				const json = await res.json();
-				if (json.success && json.data) {
-					applyPresenceData(json.data);
-				}
-			} catch (e) { }
-		}
-
-		fetchLanyardRest();
-		connectLanyardWebSocket();
-		fetchDiscordProfile();
-		fetchRecentPlays();
-		initCommentsSection();
-
-		(function () {
-			const trailCanvas = document.createElement('canvas');
-			trailCanvas.id = 'mouse-trail-canvas';
-			trailCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
-			document.body.appendChild(trailCanvas);
-			const ctx = trailCanvas.getContext('2d');
-
-			function resizeCanvas() {
-				trailCanvas.width = window.innerWidth;
-				trailCanvas.height = window.innerHeight;
-			}
-			resizeCanvas();
-			window.addEventListener('resize', resizeCanvas);
-
-			const particles = [];
-			let mouseX = -100, mouseY = -100;
-			let lastSpawn = 0;
-			let hoveredSocial = null;
-
-			const socialColors = {
-				spotify: { hue: 145, sat: 80, light: 55 },
-				steam: { hue: 202, sat: 85, light: 68 },
-				telegram: { hue: 199, sat: 76, light: 51 },
-				instagram: { hue: 335, sat: 77, light: 53 },
-				tiktok: null,
-				discord: { hue: 235, sat: 86, light: 65 },
-			};
-
-			document.addEventListener('mousemove', (e) => {
-				mouseX = e.clientX;
-				mouseY = e.clientY;
-				const el = e.target.closest('.social-pill, .social-btn');
-				if (el) {
-					if (el.classList.contains('spotify')) hoveredSocial = 'spotify';
-					else if (el.classList.contains('steam')) hoveredSocial = 'steam';
-					else if (el.classList.contains('telegram')) hoveredSocial = 'telegram';
-					else if (el.classList.contains('instagram')) hoveredSocial = 'instagram';
-					else if (el.classList.contains('tiktok')) hoveredSocial = 'tiktok';
-					else if (el.classList.contains('discord')) hoveredSocial = 'discord';
-					else hoveredSocial = null;
-				} else {
-					hoveredSocial = null;
-				}
-			});
-
-			function getParticleColor() {
-				if (!hoveredSocial) {
-					return { hue: 0, sat: 0, light: 80 + Math.random() * 15 };
-				}
-				if (hoveredSocial === 'tiktok') {
-					if (Math.random() > 0.5) {
-						return { hue: 178, sat: 85, light: 58 };
-					} else {
-						return { hue: 342, sat: 99, light: 58 };
-					}
-				}
-				const base = socialColors[hoveredSocial];
-				return {
-					hue: base.hue + (Math.random() - 0.5) * 10,
-					sat: base.sat,
-					light: base.light + Math.random() * 10,
-				};
-			}
-
-			function spawnParticle(x, y) {
-				const angle = Math.random() * Math.PI * 2;
-				const speed = Math.random() * 0.6 + 0.2;
-				const color = getParticleColor();
-				particles.push({
-					x: x + (Math.random() - 0.5) * 4,
-					y: y + (Math.random() - 0.5) * 4,
-					vx: Math.cos(angle) * speed,
-					vy: Math.sin(angle) * speed - 0.3,
-					life: 1,
-					decay: Math.random() * 0.015 + 0.012,
-					size: Math.random() * 3 + 1.5,
-					hue: color.hue,
-					sat: color.sat,
-					light: color.light,
 				});
+
+				tracksFeed.innerHTML = html;
 			}
 
-			function animate(time) {
-				requestAnimationFrame(animate);
-				ctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+			function filterTracks() {
+				const query = document.getElementById("search-input").value.toLowerCase().trim();
+				if (!query) {
+					renderTracks(allFetchedTracks);
+					return;
+				}
 
-				if (time - lastSpawn > 12) {
+				const filtered = allFetchedTracks.filter(track => {
+					const name = (track.name || "").toLowerCase();
+					const artist = (track.artist?.['#text'] || "").toLowerCase();
+					return name.includes(query) || artist.includes(query);
+				});
+
+				renderTracks(filtered);
+			}
+
+			async function playSongSnippet(title, artist, art, knownPreview) {
+				playerTitle.textContent = title;
+				playerArtist.textContent = artist;
+				playerArt.src = art;
+
+				let audioUrl = knownPreview;
+				if (!audioUrl) {
+					const trackInfo = await fetchTrackData(title, artist);
+					audioUrl = trackInfo.previewUrl;
+					if (trackInfo.artUrl) playerArt.src = trackInfo.artUrl;
+				}
+
+				if (!audioUrl) {
+					alert("No audio snippet available for this track.");
+					return;
+				}
+
+				audioElement.src = audioUrl;
+				audioElement.volume = volumeSlider.value / 100;
+				audioElement.play();
+
+				playPauseIcon.className = "fa-solid fa-pause";
+				playerBar.classList.add("active");
+			}
+
+			function togglePlayPause() {
+				if (audioElement.paused) {
+					audioElement.play();
+					playPauseIcon.className = "fa-solid fa-pause";
+				} else {
+					audioElement.pause();
+					playPauseIcon.className = "fa-solid fa-play";
+				}
+			}
+
+			function setVolume(val) {
+				audioElement.volume = val / 100;
+				volumeVal.textContent = `${val}%`;
+			}
+
+			function seekAudio(val) {
+				if (audioElement.duration) {
+					audioElement.currentTime = (val / 100) * audioElement.duration;
+				}
+			}
+
+			audioElement.addEventListener("timeupdate", () => {
+				if (audioElement.duration) {
+					const pct = (audioElement.currentTime / audioElement.duration) * 100;
+					seekSlider.value = pct;
+					currentTimeLbl.textContent = formatTime(audioElement.currentTime);
+					totalDurationLbl.textContent = formatTime(audioElement.duration);
+				}
+			});
+
+			audioElement.addEventListener("ended", () => {
+				playPauseIcon.className = "fa-solid fa-play";
+				seekSlider.value = 0;
+			});
+
+			function formatTime(seconds) {
+				const mins = Math.floor(seconds / 60);
+				const secs = Math.floor(seconds % 60);
+				return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+			}
+
+			function closePlayer() {
+				audioElement.pause();
+				audioElement.src = "";
+				playerBar.classList.remove("active");
+			}
+
+			function escapeHTML(str) {
+				return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+			}
+
+			function escapeJs(str) {
+				return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+			}
+
+			function spawnParticles() {
+				const dylanEl = document.getElementById("dylan-target");
+				if (dylanEl) {
+					const p = document.createElement("span");
+					p.className = "particle-uwu";
+					p.textContent = ["</3", ":(", ";(", ":/"][Math.floor(Math.random() * 4)];
+					p.style.left = (Math.random() * 20 - 5) + "px";
+					p.style.top = "5px";
+
+					const angle = Math.random() * Math.PI * 2;
+					const dist = 20 + Math.random() * 25;
+					const tx = Math.cos(angle) * dist + "px";
+					const ty = Math.sin(angle) * dist + "px";
+
+					p.style.setProperty('--tx', tx);
+					p.style.setProperty('--ty', ty);
+
+					dylanEl.appendChild(p);
+					setTimeout(() => p.remove(), 2200);
+				}
+
+				const loveEl = document.getElementById("love-target");
+				if (loveEl) {
+					const p = document.createElement("span");
+					p.className = "particle-heart";
+					p.textContent = "<3";
+					p.style.left = (Math.random() * 25 - 5) + "px";
+					p.style.top = "5px";
+
+					const angle = Math.random() * Math.PI * 2;
+					const dist = 20 + Math.random() * 25;
+					const tx = Math.cos(angle) * dist + "px";
+					const ty = Math.sin(angle) * dist + "px";
+
+					p.style.setProperty('--tx', tx);
+					p.style.setProperty('--ty', ty);
+
+					loveEl.appendChild(p);
+					setTimeout(() => p.remove(), 2000);
+				}
+
+				const devEl = document.getElementById("dev-target");
+				if (devEl) {
+					const p = document.createElement("span");
+					p.className = "particle-code";
+					p.textContent = ["</>", "{ }", "<>"][Math.floor(Math.random() * 3)];
+					p.style.left = (Math.random() * 30 - 5) + "px";
+					p.style.top = "5px";
+
+					const angle = Math.random() * Math.PI * 2;
+					const dist = 20 + Math.random() * 25;
+					const tx = Math.cos(angle) * dist + "px";
+					const ty = Math.sin(angle) * dist + "px";
+
+					p.style.setProperty('--tx', tx);
+					p.style.setProperty('--ty', ty);
+
+					devEl.appendChild(p);
+					setTimeout(() => p.remove(), 2000);
+				}
+			}
+			setInterval(spawnParticles, 700);
+
+			function spawnButtonSparkle(e, btn, color) {
+				const rect = btn.getBoundingClientRect();
+				const sparkle = document.createElement("div");
+				sparkle.className = "btn-sparkle";
+				const chosenColor = Array.isArray(color) ? color[Math.floor(Math.random() * color.length)] : color;
+				sparkle.style.background = chosenColor;
+				sparkle.style.boxShadow = `0 0 8px ${chosenColor}`;
+				sparkle.style.left = (e.clientX - rect.left) + "px";
+				sparkle.style.top = (e.clientY - rect.top) + "px";
+
+				const dx = (Math.random() - 0.5) * 35 + "px";
+				const dy = (Math.random() - 0.5) * 35 + "px";
+				sparkle.style.setProperty('--dx', dx);
+				sparkle.style.setProperty('--dy', dy);
+
+				btn.appendChild(sparkle);
+				setTimeout(() => sparkle.remove(), 1200);
+			}
+
+			const gibberishChars = "123456789";
+			function updateGibberish() {
+				const gibEl = document.getElementById("gibberish-target");
+				if (gibEl) {
+					let result = "";
 					for (let i = 0; i < 2; i++) {
-						spawnParticle(mouseX, mouseY);
+						result += gibberishChars.charAt(Math.floor(Math.random() * gibberishChars.length));
 					}
-					lastSpawn = time;
-				}
-
-				for (let i = particles.length - 1; i >= 0; i--) {
-					const p = particles[i];
-					p.x += p.vx;
-					p.y += p.vy;
-					p.vy += 0.01;
-					p.vx *= 0.99;
-					p.life -= p.decay;
-
-					if (p.life <= 0) {
-						particles.splice(i, 1);
-						continue;
-					}
-
-					const alpha = p.life * 0.8;
-					const radius = p.size * p.life;
-
-					ctx.save();
-					ctx.globalAlpha = alpha;
-					ctx.beginPath();
-					ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-
-					const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
-					gradient.addColorStop(0, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 1)`);
-					gradient.addColorStop(0.4, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0.6)`);
-					gradient.addColorStop(1, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0)`);
-					ctx.fillStyle = gradient;
-					ctx.fill();
-
-					ctx.shadowBlur = 8;
-					ctx.shadowColor = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${alpha * 0.5})`;
-					ctx.beginPath();
-					ctx.arc(p.x, p.y, radius * 0.5, 0, Math.PI * 2);
-					ctx.fill();
-					ctx.restore();
+					gibEl.textContent = result + "";
 				}
 			}
+			setInterval(updateGibberish, 35);
 
-			requestAnimationFrame(animate);
-		})();
-	</script>
+			async function fetchLanyardRest() {
+				try {
+					const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+					if (!res.ok) return;
+					const json = await res.json();
+					if (json.success && json.data) {
+						applyPresenceData(json.data);
+					}
+				} catch (e) { }
+			}
+
+			fetchLanyardRest();
+			connectLanyardWebSocket();
+			fetchDiscordProfile();
+			fetchRecentPlays();
+
+			(function () {
+				const trailCanvas = document.createElement('canvas');
+				trailCanvas.id = 'mouse-trail-canvas';
+				trailCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;';
+				document.body.appendChild(trailCanvas);
+				const ctx = trailCanvas.getContext('2d');
+
+				function resizeCanvas() {
+					trailCanvas.width = window.innerWidth;
+					trailCanvas.height = window.innerHeight;
+				}
+				resizeCanvas();
+				window.addEventListener('resize', resizeCanvas);
+
+				const particles = [];
+				let mouseX = -100, mouseY = -100;
+				let lastSpawn = 0;
+				let hoveredSocial = null;
+
+				const socialColors = {
+					spotify: { hue: 145, sat: 80, light: 55 },
+					steam: { hue: 202, sat: 85, light: 68 },
+					telegram: { hue: 199, sat: 76, light: 51 },
+					instagram: { hue: 335, sat: 77, light: 53 },
+					tiktok: null,
+					discord: { hue: 235, sat: 86, light: 65 },
+				};
+
+				document.addEventListener('mousemove', (e) => {
+					mouseX = e.clientX;
+					mouseY = e.clientY;
+					const el = e.target.closest('.social-pill, .social-btn');
+					if (el) {
+						if (el.classList.contains('spotify')) hoveredSocial = 'spotify';
+						else if (el.classList.contains('steam')) hoveredSocial = 'steam';
+						else if (el.classList.contains('telegram')) hoveredSocial = 'telegram';
+						else if (el.classList.contains('instagram')) hoveredSocial = 'instagram';
+						else if (el.classList.contains('tiktok')) hoveredSocial = 'tiktok';
+						else if (el.classList.contains('discord')) hoveredSocial = 'discord';
+						else hoveredSocial = null;
+					} else {
+						hoveredSocial = null;
+					}
+				});
+
+				function getParticleColor() {
+					if (!hoveredSocial) {
+						return { hue: 0, sat: 0, light: 80 + Math.random() * 15 };
+					}
+					if (hoveredSocial === 'tiktok') {
+						if (Math.random() > 0.5) {
+							return { hue: 178, sat: 85, light: 58 };
+						} else {
+							return { hue: 342, sat: 99, light: 58 };
+						}
+					}
+					const base = socialColors[hoveredSocial];
+					return {
+						hue: base.hue + (Math.random() - 0.5) * 10,
+						sat: base.sat,
+						light: base.light + Math.random() * 10,
+					};
+				}
+
+				function spawnParticle(x, y) {
+					const angle = Math.random() * Math.PI * 2;
+					const speed = Math.random() * 0.6 + 0.2;
+					const color = getParticleColor();
+					particles.push({
+						x: x + (Math.random() - 0.5) * 4,
+						y: y + (Math.random() - 0.5) * 4,
+						vx: Math.cos(angle) * speed,
+						vy: Math.sin(angle) * speed - 0.3,
+						life: 1,
+						decay: Math.random() * 0.015 + 0.012,
+						size: Math.random() * 3 + 1.5,
+						hue: color.hue,
+						sat: color.sat,
+						light: color.light,
+					});
+				}
+
+				function animate(time) {
+					requestAnimationFrame(animate);
+					ctx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+
+					if (time - lastSpawn > 12) {
+						for (let i = 0; i < 2; i++) {
+							spawnParticle(mouseX, mouseY);
+						}
+						lastSpawn = time;
+					}
+
+					for (let i = particles.length - 1; i >= 0; i--) {
+						const p = particles[i];
+						p.x += p.vx;
+						p.y += p.vy;
+						p.vy += 0.01;
+						p.vx *= 0.99;
+						p.life -= p.decay;
+
+						if (p.life <= 0) {
+							particles.splice(i, 1);
+							continue;
+						}
+
+						const alpha = p.life * 0.8;
+						const radius = p.size * p.life;
+
+						ctx.save();
+						ctx.globalAlpha = alpha;
+						ctx.beginPath();
+						ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+
+						const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
+						gradient.addColorStop(0, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 1)`);
+						gradient.addColorStop(0.4, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0.6)`);
+						gradient.addColorStop(1, `hsla(${p.hue}, ${p.sat}%, ${p.light}%, 0)`);
+						ctx.fillStyle = gradient;
+						ctx.fill();
+
+						ctx.shadowBlur = 8;
+						ctx.shadowColor = `hsla(${p.hue}, ${p.sat}%, ${p.light}%, ${alpha * 0.5})`;
+						ctx.beginPath();
+						ctx.arc(p.x, p.y, radius * 0.5, 0, Math.PI * 2);
+						ctx.fill();
+						ctx.restore();
+					}
+				}
+
+				requestAnimationFrame(animate);
+			})();
+		</script>
 </body>
 
 </html>

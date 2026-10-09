@@ -859,7 +859,7 @@
             }
         }
 
-        /* folder stack for song tabs */
+
         .fstack {
             position: relative;
             max-width: 800px;
@@ -929,7 +929,7 @@
             }
         }
 
-        /* drop-in animation when a section comes into view */
+
         .drop {
             opacity: 0;
             transform: translateY(-60px);
@@ -965,7 +965,7 @@
             }
         }
 
-        /* monochrome glass backdrop */
+
         body::before {
             content: "";
             position: fixed;
@@ -1008,7 +1008,7 @@
         }
 
 
-        /* weather + server widgets */
+
         .duo {
             margin-top: 0
         }
@@ -1152,7 +1152,7 @@
             color: #9a9a9a
         }
 
-        /* theme: dark minimal, left rail, fine-line texture */
+
         body {
             background: #0d0d0d;
             -webkit-font-smoothing: antialiased
@@ -1326,7 +1326,7 @@
             }
         }
 
-        /* card style: soft gradient fill, thin border, inset highlight, icon tiles */
+
         .box {
             border-radius: 16px;
             background: linear-gradient(150deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025) 55%, rgba(255, 255, 255, 0.04));
@@ -1392,7 +1392,7 @@
             height: 17px
         }
 
-        /* sidebar hover tooltips */
+
         .dots button {
             position: relative
         }
@@ -1439,7 +1439,7 @@
             }
         }
 
-        /* keep the default cursor everywhere */
+
         *,
         *::before,
         *::after {
@@ -1703,7 +1703,7 @@
         $('ds').style.background = COL.offline;
         $('av').onerror = function () { this.onerror = null; this.src = AV0 };
         $('prof').onclick = function () { window.open('https://discord.com/users/' + UID, '_blank', 'noopener') };
-        /* guild tag + nitro badges */
+
         var LPG = null, DPG = null;
         var tipEl = null;
         function since(desc) {
@@ -1787,7 +1787,7 @@
                 }).catch(function () { })
             })
         })();
-        /* typewriter tab title: the name stays, only the suffix types and erases */
+
         var TN = '', TS = 'catboys.co', ti = 0, td2 = 1, tOn = false;
         function tick() {
             if (td2 > 0) { if (ti < TS.length) ti++; else { td2 = -1; return setTimeout(tick, 2200) } }
@@ -1799,7 +1799,7 @@
         setTimeout(function () { if (!tOn) setTitle('') }, 2500);
         poll(); ws();
 
-        /* weather widget (Open-Meteo, no key needed) */
+ 
         (function () {
             var CL = '<path d="M7 18a4 4 0 010-8 5.5 5.5 0 0110.6 1.5A3.3 3.3 0 0117 18z"/>';
             var IC = {
@@ -1838,7 +1838,7 @@
             start(); setInterval(start, 15 * 60 * 1000)
         })();
 
-        /* discord server widget */
+
 
         (function () {
             function $(id) {
@@ -1922,7 +1922,7 @@
             var now = performance.now();
             if (busy || now < lockUntil) { e.preventDefault(); if (!busy) lockUntil = Math.max(lockUntil, now + 120); return }
             var i = idx(), st = secTop(i), sb = st + secs[i].offsetHeight, vt = sc.scrollTop, vb = vt + sc.clientHeight;
-            if ((e.deltaY > 0 && vb < sb - 2) || (e.deltaY < 0 && vt > st + 2)) return; /* tall section: let it scroll normally */
+            if ((e.deltaY > 0 && vb < sb - 2) || (e.deltaY < 0 && vt > st + 2)) return; 
             e.preventDefault();
             if (Math.abs(e.deltaY) < 4) return;
             go(i + (e.deltaY > 0 ? 1 : -1))
